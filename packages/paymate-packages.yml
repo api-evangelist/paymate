@@ -1,0 +1,38 @@
+generated: '2026-08-26'
+method: searched
+source: registry.npmjs.org, pypi.org, rubygems.org, api.github.com; https://api.paymate.my/GlobalPartnerAPI; https://paymate.in/paymateapi/APIDoc.html
+checked: '2026-08-26'
+package_count: 0
+packages: []
+note: >-
+  PayMate publishes no first-party SDK or client library in any package registry, and neither documentation
+  surface links to one. Integrators are expected to POST JSON directly (and, on the India API, to implement
+  AES-256 payload encryption themselves) with no reference implementation provided.
+searched:
+- registry: npm
+  query: paymate
+  result: >-
+    Six packages under the @paymate-software scope (ngx-image-viewer, ngx-treeview, ngx-pipe-function,
+    ngx-loading-spinner, ngx-range-slider, ngxs-reset-plugin). These are Angular UI forks published by
+    github.com/paymatesoftware — Paymate Software Corp, an unrelated North American payroll/HR vendor — and
+    are NOT PayMate India Limited. Not recorded as PayMate packages.
+- registry: PyPI
+  query: paymate
+  result: HTTP 404 — no such package.
+- registry: RubyGems
+  query: paymate
+  result: HTTP 404 — no such gem.
+- registry: GitHub
+  query: paymate org/repo search
+  result: >-
+    github.com/PayMate-India-Limited exists (created 2025-04-10) but has 0 public repositories, no name, no
+    description and no linked website, so it could not be confirmed as the company's and publishes nothing.
+    Every other paymate-named repository found belongs to an unrelated project.
+- registry: docs
+  query: SDK / client library / download links on paymate.in and the Partner API documentation app
+  result: None. No SDK section, no code samples beyond raw JSON request/response bodies.
+gaps:
+- No official SDK in any language.
+- No published Postman collection or workspace.
+- No CLI.
+- No code samples in any programming language — the documentation shows JSON payloads only.

@@ -1,0 +1,122 @@
+generated: '2026-08-26'
+method: searched
+source: https://paymate.in/Pricing_terms.html
+docs: https://paymate.in/Pricing_terms.html
+currency: INR
+region: India
+note: >-
+  PayMate's dedicated pricing page (https://paymate.in/pricing.html, still listed in
+  https://paymate.in/paymateSitemap.xml and still linked from the API documentation) returns HTTP 404. The
+  published plan and fee schedule that survives is clause 9 of the Payment Terms at
+  https://paymate.in/Pricing_terms.html, transcribed below. All charges are stated exclusive of 18% GST.
+  No pricing at all is published for the Global Partner API or for the Singapore, Malaysia, UAE, Oman,
+  Australia or South Africa deployments — those are sales-gated.
+plan_count: 6
+plans:
+- name: Try and Buy
+  price: 0
+  currency: INR
+  period: 30 days
+  billing: one-off trial
+  platform_access: Mobile App + Web
+  api_access: false
+  included:
+    total_transactions: 25 AR+AP
+    max_amount_per_transaction: 10000 INR
+    total_amount_transacted: 100000 INR
+  overage: No transactions permitted past the limit.
+  functionality: Standard payments; single user account; PAYG Rs. 5/invoice.
+- name: SME Plan 499 (Enterprise 499)
+  price: 499
+  currency: INR
+  period: month
+  setup_fee: 0
+  platform_access: Mobile App + Web
+  api_access: false
+  included:
+    total_transactions: 500 AR+AP/month
+    max_amount_per_transaction: unlimited
+    total_amount_transacted: unlimited
+  overage: Additional charge of Rs. 10 per transaction beyond the monthly cap.
+  functionality: Maker/Checker/Approver; invoicing.
+- name: App
+  price: 0
+  currency: INR
+  period: month
+  platform_access: Mobile App only
+  api_access: false
+  included:
+    total_transactions: unlimited
+    max_amount_per_transaction: no limit
+  functionality: Standard payments; single user account.
+- name: Basic API
+  price: 999
+  currency: INR
+  period: month
+  setup_fee: 5000
+  platform_access: Mobile App + Web + Standard APIs
+  api_access: true
+  included:
+    total_transactions: 1000 AR+AP/month
+    max_amount_per_transaction: unlimited
+    total_amount_transacted: unlimited
+    domains_allowed_access: 1
+  overage: Additional charge of Rs. 10 per transaction beyond the monthly cap.
+  functionality: Maker/Checker/Approver; invoicing along with standard APIs.
+- name: Enterprise API
+  price: 1999
+  currency: INR
+  period: month
+  setup_fee: 5000
+  platform_access: Mobile App + Web + Enhanced APIs
+  api_access: true
+  included:
+    total_transactions: 3000 AR+AP/month
+    max_amount_per_transaction: unlimited
+    total_amount_transacted: unlimited
+    domains_allowed_access: 3
+  overage: Additional charge of Rs. 10 per transaction beyond the monthly cap.
+  functionality: Maker/Checker/Approver; invoicing along with standard APIs for Procure To Pay.
+- name: Enterprise Custom Plan
+  price: null
+  currency: INR
+  period: null
+  setup_fee: 25000
+  platform_access: Mobile App + Web + Enhanced APIs
+  api_access: true
+  included:
+    total_transactions: unlimited
+    max_amount_per_transaction: unlimited
+    domains_allowed_access: 5
+  overage: not applicable
+  functionality: Maker/Checker/Approver; invoicing along with standard APIs for Procure To Pay.
+  note: Built with the PayMate team and customised to requirement; no published price.
+transaction_fees:
+  note: >-
+    Charged per transaction in addition to the subscription, exclusive of 18% GST. Values below are the
+    Basic API / Enterprise API / Enterprise Custom columns of the published fee schedule.
+  send_money:
+    neft: free
+    rtgs: free
+    imps: 10 INR
+    credit_card: 2.5% (2.25% on Enterprise Custom)
+    debit_card: 1%
+    net_banking: 30 INR
+  receive_money:
+    neft: free
+    rtgs: free
+    credit_card: 2.5% (2.25% on Enterprise Custom)
+    debit_card: 1% (only above Rs. 2000)
+    net_banking: 30 INR
+    settlement: T+2, free
+  constraints:
+  - IMPS transactions are limited to Rs. 2 lacs per transaction.
+  - Fees on a confirmed transaction are not returned even if the transaction is rejected, charged back,
+    refunded or disputed.
+  - PayMate reserves the right to terminate unpaid accounts inactive for 120 continuous days.
+subscription_terms:
+  auto_renew: true
+  refunds: >-
+    "A User shall not be entitled to any refunds or credits in respect of the Subscription Fees ... even in
+    cases where the User has elected to terminate his subscription."
+  cancellation: Once renewed the subscription cannot be cancelled, modified or reversed.

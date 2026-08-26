@@ -1,0 +1,147 @@
+generated: '2026-08-26'
+method: derived
+source: openapi/paymate-global-partner-api-openapi.yml (+ openapi/_source/paymate-global-partner-api-*.json)
+api: PayMate Global Partner API
+note: >-
+  Derived from the request/response object graph PayMate publishes in its own Partner API documentation
+  dataset. PayMate does not publish a schema/object reference, so entity names below are the object names
+  the API itself uses (BusinessInfo, ContactInformation, BankAccountDetails, TransactionDetails, ...) and
+  relationships are read from the id-reference fields that bind them. There are no $ref links to resolve —
+  the surface is a flat JSON envelope per operation — so every relationship here is evidenced by a shared
+  identifier field, not by a declared reference.
+identifiers:
+- field: RequestID
+  scope: request
+  description: Partner-generated unique request number, mandatory on every operation, echoed in the response.
+- field: BusinessCode
+  scope: business
+  description: Business unique reference number on the partner system.
+- field: PMXID
+  scope: business
+  description: PayMate-side business identifier (the global successor to the India API's XpressID).
+- field: OrderID
+  scope: transaction
+  description: >-
+    Client-generated order identifier on payment and collection creation. A repeat submission is rejected
+    with StatusCode 413 "OrderId already processed", which is the platform's duplicate-submission guard.
+- field: PayMateRequestNo
+  scope: transaction
+  description: PayMate-side transaction reference; accepted in place of OrderID on status/report lookups.
+entities:
+- name: Business
+  object: BusinessInfo
+  description: The onboarded merchant/partner business (KYB subject).
+  created_by: BusinessBoarding
+  modified_by: ModifyBusiness
+  deleted_by: DeleteBusiness
+  read_by: ManageBusiness
+  relationships:
+  - has_many: Contact
+    via: BusinessCode
+  - has_many: Card
+    via: BusinessCode
+  - has_one: TransactionCharges
+    via: BusinessCode
+  - has_one: BankAccountDetails
+    via: BusinessCode
+    note: The collection (settlement) account, set by SetCollectionAccount.
+  - has_many: Payment
+    via: BusinessCode
+  - has_many: Collection
+    via: BusinessCode
+  - has_many: ShareholderDetails
+    via: BusinessCode
+  - has_many: KYCDocument
+    via: BusinessCode
+- name: Contact
+  object: ContactInformation
+  description: A buyer or supplier of the business — the payee on a payment, the payer on a collection.
+  created_by: ContactBoarding
+  modified_by: ModifyContact
+  deleted_by: DeleteContact
+  read_by: ManageContacts
+  relationships:
+  - belongs_to: Business
+    via: BusinessCode
+  - has_one: BankAccountDetails
+    via: contact record
+  - has_one: KYCDetails
+    via: contact record
+- name: BankAccountDetails
+  description: Account number / routing details attached to a contact or to the business collection account.
+  relationships:
+  - belongs_to: Contact
+  - belongs_to: Business
+- name: Card
+  description: Commercial credit card enrolled by the business and used to fund payments.
+  created_by: AddCard
+  deleted_by: DeleteCard
+  read_by: ManageCards
+  relationships:
+  - belongs_to: Business
+    via: BusinessCode
+- name: Payment
+  object: TransactionDetails
+  description: An outbound vendor payment funded by a commercial card.
+  created_by: MakePayments
+  read_by: GetPaymentStatus, PaymentReport
+  relationships:
+  - belongs_to: Business
+    via: BusinessCode
+  - belongs_to: Contact
+    via: payee reference
+  - has_many: Invoice
+    via: OrderID
+  - has_many: DebitNote
+    via: OrderID
+  - has_one: RemitterAccountDetails
+    via: OrderID
+  - has_one: SettlementDetails
+    via: OrderID
+  - has_one: RefundDetails
+    via: OrderID
+    note: Populated only when settlement fails and PayMate auto-refunds; there is no refund operation.
+- name: Collection
+  object: CollectionDetails
+  description: An inbound payment collection request sent to a customer.
+  created_by: CollectPayment
+  read_by: CollectionStatus, CollectionReport
+  relationships:
+  - belongs_to: Business
+    via: BusinessCode
+  - belongs_to: Contact
+    via: payer reference
+  - has_many: Invoice
+    via: OrderID
+  - has_one: SplitMDR
+    via: OrderID
+  - has_one: CollectionSummary
+    via: OrderID
+  - has_one: SettlementDetails
+    via: OrderID
+  - has_one: RefundDetails
+    via: OrderID
+- name: Invoice
+  description: Invoice line detail attached to a payment or a collection.
+  relationships:
+  - belongs_to: Payment
+  - belongs_to: Collection
+- name: KYCDocument
+  description: Business proof, address proof and bank proof documents submitted for buyer/supplier KYC.
+  created_by: Buyersupplierkyc
+  relationships:
+  - belongs_to: Business
+- name: ShareholderDetails
+  description: Beneficial-owner / shareholder records submitted for KYB.
+  created_by: ShareholderDetails
+  relationships:
+  - belongs_to: Business
+- name: TransactionCharges
+  description: Per-business fee configuration.
+  created_by: BusinessBoarding
+  modified_by: SetTransactionCharges
+  relationships:
+  - belongs_to: Business
+- name: Country
+  description: Reference list of supported countries (ISO code + name).
+  read_by: Countrylist

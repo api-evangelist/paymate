@@ -1,0 +1,194 @@
+generated: '2026-08-26'
+method: searched
+source: https://paymate.in/paymateapi/APIDoc.html#errorcodes
+api: PayMate India Business Payments API (PMXClients)
+format: proprietary-envelope
+note: The legacy India API does not use RFC 9457. Each response carries XpressID, ErrorCode, ErrorDescription and
+  Response; ErrorCode "000" is success. Codes 198-216 are payment lifecycle states (awaiting approval, sent to bank,
+  returned from beneficiary, ...) rather than faults.
+envelope:
+  fields:
+  - field: XpressID
+    description: Account identifier echoed from the request header
+  - field: ErrorCode
+    description: Three-digit code; 000 = Success
+  - field: ErrorDescription
+    description: Human-readable description (max 100 chars)
+  - field: Response
+    description: Array of response data; empty when ErrorCode != 000
+error_count: 58
+errors:
+- code: '000'
+  title: Success
+  category: success
+- code: '101'
+  title: UnAuthorised User Access Denied
+  category: authentication
+- code: '102'
+  title: Request Data Decryption Failed
+  category: authentication
+- code: '103'
+  title: Invalid Header XpressID
+  category: authentication
+- code: '104'
+  title: UnAuthorised Access of Request Type / Sub Type
+  category: authentication
+- code: '105'
+  title: Request Data has been Tampered
+  category: authentication
+- code: '106'
+  title: Request Data Validation Fail - Company Name
+  category: authentication
+- code: '107'
+  title: Request Data Validation Fail - Contact Person
+  category: validation
+- code: '108'
+  title: Request Data Validation Fail - Mobile Number
+  category: validation
+- code: '109'
+  title: Request Data Validation Fail - Email Address
+  category: validation
+- code: '120'
+  title: SOAP Credential is Empty
+  category: validation
+- code: '122'
+  title: Request Data Validation Fail - Company Code
+  category: validation
+- code: '123'
+  title: Invalid Company Code
+  category: validation
+- code: '124'
+  title: Empty / Invalid Company Name
+  category: validation
+- code: '125'
+  title: Empty / Invalid Contact Person
+  category: validation
+- code: '126'
+  title: Empty / Invalid Mobile Number
+  category: validation
+- code: '127'
+  title: Empty / Invalid Email Address
+  category: validation
+- code: '128'
+  title: Empty / Invalid Company Address
+  category: validation
+- code: '129'
+  title: Request from invalid Source
+  category: validation
+- code: '159'
+  title: Transaction Amount is Blank or Invalid Amount
+  category: validation
+- code: '162'
+  title: Remitter Bank Account No is Blank
+  category: validation
+- code: '163'
+  title: Invalid Remitter Account No
+  category: validation
+- code: '166'
+  title: Remitter Bank IFSC is Blank
+  category: validation
+- code: '167'
+  title: Invalid Remitter Bank IFSC
+  category: validation
+- code: '176'
+  title: Invalid OrderId
+  category: validation
+- code: '177'
+  title: Invalid PMX TransactionID
+  category: validation
+- code: '178'
+  title: Invalid Input Parameter(s)
+  category: validation
+- code: '179'
+  title: Cannot Abort Transaction
+  category: validation
+- code: '180'
+  title: Amount limit exceeded
+  category: validation
+- code: '181'
+  title: Remarks length exceeded
+  category: validation
+- code: '192'
+  title: No Method Access for ip
+  category: validation
+- code: '198'
+  title: Awaiting to check
+  category: validation
+- code: '199'
+  title: Awaiting to approve
+  category: validation
+- code: '200'
+  title: Awaiting to pay
+  category: validation
+- code: '201'
+  title: Awaiting payment
+  category: validation
+- code: '202'
+  title: Sent to bank
+  category: validation
+- code: '203'
+  title: Aborted
+  category: validation
+- code: '204'
+  title: Failed
+  category: validation
+- code: '205'
+  title: Expired
+  category: validation
+- code: '207'
+  title: Pending
+  category: validation
+- code: '211'
+  title: Processing
+  category: validation
+- code: '212'
+  title: Rejected
+  category: validation
+- code: '214'
+  title: Returned from beneficiary
+  category: validation
+- code: '215'
+  title: Scheduled for next working day
+  category: validation
+- code: '216'
+  title: Sent to Beneficiary
+  category: validation
+- code: '224'
+  title: Transaction already processed
+  category: validation
+- code: '225'
+  title: No Record(s) found
+  category: validation
+- code: '226'
+  title: Invalid Vendor's XpressId
+  category: validation
+- code: '227'
+  title: OrderID Already Exsits.
+  category: validation
+- code: '228'
+  title: Empty / Invalid Sender Code.
+  category: validation
+- code: '229'
+  title: Sender Name is Empty.
+  category: validation
+- code: '230'
+  title: Payment request has been initiated successfully
+  category: validation
+- code: '231'
+  title: Paid
+  category: validation
+- code: '232'
+  title: Empty / Invalid Company Name.
+  category: validation
+- code: '233'
+  title: Empty / Invalid Account No.
+  category: validation
+- code: '234'
+  title: Empty / Invalid Date.
+  category: validation
+- code: '235'
+  title: Invalid Date Range
+  category: validation
+- code: '999'
+  title: Technical error
+  category: validation

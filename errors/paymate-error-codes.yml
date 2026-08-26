@@ -1,0 +1,1553 @@
+generated: '2026-08-26'
+method: searched
+source: https://api.paymate.my/GlobalPartnerAPI (Error Codes page; verbatim dataset in openapi/_source/paymate-global-partner-api-error-codes.json)
+api: PayMate Global Partner API
+format: proprietary-envelope
+note: PayMate does not use RFC 9457 problem+json. Every Global Partner API call returns HTTP 200 (or 401 when header
+  credentials are missing) with a JSON envelope; the business outcome is carried in the StatusCode field. Codes
+  are three digits, "000" means success, and codes in the 400-439 and 500-560 ranges are transaction/settlement
+  lifecycle states rather than client faults.
+envelope:
+  fields:
+  - field: RequestID
+    description: Echo of the partner-supplied unique request identifier
+  - field: StatusCode
+    description: Three-digit PayMate status/error code (see codes below)
+  - field: Description
+    description: Human-readable status description
+  - field: DetailedSummary
+    description: Operation payload; empty object on error
+  observed_example:
+    RequestID: null
+    StatusCode: '106'
+    Description: Empty/Invalid header credentials
+    DetailedSummary: {}
+  observed_on: POST https://api.paymate.my/v1/Countrylist — HTTP 401, 2026-08-26
+error_count: 508
+errors:
+- code: '000'
+  title: Success
+  category: success
+- code: '101'
+  title: Unauthorised User Access Denied
+  category: authentication
+- code: '102'
+  title: Request Data Decryption Failed
+  category: authentication
+- code: '103'
+  title: Invalid PMXID (Xpress ID)
+  category: authentication
+- code: '104'
+  title: Request Data has been Tampered
+  category: authentication
+- code: '105'
+  title: Request from Invalid Source
+  category: authentication
+- code: '106'
+  title: Invalid header credentials
+  category: authentication
+- code: '107'
+  title: Unauthorised Access to API
+  category: validation
+- code: '108'
+  title: Merchant not active
+  category: validation
+- code: '109'
+  title: Business not active
+  category: validation
+- code: '140'
+  title: Amount limit exceeded
+  category: validation
+- code: '141'
+  title: Transaction count exceeded
+  category: validation
+- code: '142'
+  title: Transaction volume exceeded
+  category: validation
+- code: '144'
+  title: Subscription Expired/ you are not subscribed
+  category: validation
+- code: '150'
+  title: Payment type not configured
+  category: validation
+- code: '178'
+  title: Invalid Input Parameter(s)
+  category: validation
+- code: '179'
+  title: No record(s) found
+  category: validation
+- code: '200'
+  title: Business Active
+  category: validation
+- code: '201'
+  title: Empty / Invalid BusinessCode
+  category: validation
+- code: '202'
+  title: Empty / Invalid BusinessName
+  category: validation
+- code: '203'
+  title: Empty / Invalid contact person name
+  category: validation
+- code: '204'
+  title: Empty / Invalid ISD Code
+  category: validation
+- code: '205'
+  title: Empty / Invalid Business email address
+  category: validation
+- code: '206'
+  title: Empty / Invalid Mobile Number
+  category: validation
+- code: '207'
+  title: Empty / Invalid Business Type
+  category: validation
+- code: '208'
+  title: Empty / Invalid ContactKYCRequired
+  category: validation
+- code: '209'
+  title: Invalid website address
+  category: validation
+- code: '210'
+  title: Empty / Invalid Service Type
+  category: validation
+- code: '211'
+  title: Empty / Invalid payment mode
+  category: validation
+- code: '212'
+  title: Empty / Invalid processing rate
+  category: validation
+- code: '213'
+  title: Empty / Invalid accepted by
+  category: validation
+- code: '214'
+  title: Empty / Invalid acceptance date
+  category: validation
+- code: '215'
+  title: Empty / Invalid business ip address
+  category: validation
+- code: '216'
+  title: Empty / Invalid transaction charges
+  category: validation
+- code: '217'
+  title: Empty / Invalid terms conditions
+  category: validation
+- code: '218'
+  title: Invalid accepted by email address
+  category: validation
+- code: '219'
+  title: Your business information has been updated successfully
+  category: validation
+- code: '220'
+  title: Empty / Invalid Document Type (Address proof)
+  category: validation
+- code: '221'
+  title: Empty / Invalid Document Type (Business proof)
+  category: validation
+- code: '222'
+  title: Empty / Invalid BusinessProof
+  category: validation
+- code: '223'
+  title: Empty / Invalid AddressProof
+  category: validation
+- code: '224'
+  title: Empty / Invalid BankProof
+  category: validation
+- code: '225'
+  title: Your business charges has been updated successfully
+  category: validation
+- code: '226'
+  title: Empty / Invalid Document Number (BusinessProof)
+  category: validation
+- code: '227'
+  title: Empty / Invalid Name on Document (BusinessProof)
+  category: validation
+- code: '228'
+  title: Empty / Invalid Document Proof (BusinessProof)
+  category: validation
+- code: '229'
+  title: Empty / Invalid File Name (BusinessProof)
+  category: validation
+- code: '230'
+  title: Empty / Invalid Address
+  category: validation
+- code: '231'
+  title: Empty / Invalid Document Proof (AddressProof)
+  category: validation
+- code: '232'
+  title: Empty / Invalid File Name (AddressProof)
+  category: validation
+- code: '233'
+  title: Empty / Invalid PIN Code
+  category: validation
+- code: '234'
+  title: Empty / Invalid Business Nature
+  category: validation
+- code: '235'
+  title: Empty / Invalid account holder name
+  category: validation
+- code: '236'
+  title: Empty / Invalid Account No.
+  category: validation
+- code: '237'
+  title: Empty / Invalid BIC Code
+  category: validation
+- code: '238'
+  title: Empty/Invalid BusinessInfo node
+  category: validation
+- code: '239'
+  title: Empty/Invalid Transaction Charges node
+  category: validation
+- code: '240'
+  title: Empty/Invalid Terms and Conditions node
+  category: validation
+- code: '241'
+  title: Invalid Business description or length exceeded
+  category: validation
+- code: '242'
+  title: Your business has been deleted successfully
+  category: validation
+- code: '243'
+  title: Empty/Invalid Routing Number
+  category: validation
+- code: '244'
+  title: Empty/Invalid Business Country
+  category: validation
+- code: '245'
+  title: Empty/Invalid Currency Code
+  category: validation
+- code: '246'
+  title: Empty/Invalid Issuer Code
+  category: validation
+- code: '247'
+  title: Empty/Invalid Branch City
+  category: validation
+- code: '248'
+  title: Empty/Invalid Country Code
+  category: validation
+- code: '249'
+  title: Empty/Invalid Business XpressId
+  category: validation
+- code: '250'
+  title: Empty/Invalid Reason
+  category: validation
+- code: '251'
+  title: Business boarding failed
+  category: validation
+- code: '252'
+  title: Business Code already registered
+  category: validation
+- code: '254'
+  title: The Business name entered already exits. Please try with another name.
+  category: validation
+- code: '255'
+  title: The entered email address is already registered. Please provide another email address.
+  category: validation
+- code: '256'
+  title: The entered Mobile Number is already registered. Please provide another Mobile Number.
+  category: validation
+- code: '257'
+  title: Document already submited.
+  category: validation
+- code: '258'
+  title: Document upload failed
+  category: validation
+- code: '259'
+  title: You cannot add this account no as it has been blocked on PayMate for security reasons. Please get in touch
+    with us at support@paymate.co.in for further clarity.
+  category: validation
+- code: '260'
+  title: The entered account details are already registered for your account. Please provide another bank account
+    detail.
+  category: validation
+- code: '261'
+  title: Empty / Invalid City
+  category: validation
+- code: '262'
+  title: Empty / Invalid Document Type(Bank proof)
+  category: validation
+- code: '263'
+  title: Empty / Invalid Document Proof(Bank Proof)
+  category: validation
+- code: '264'
+  title: Empty / Invalid File Name (BankProof)
+  category: validation
+- code: '265'
+  title: Empty / Invalid BusinessCode
+  category: validation
+- code: '266'
+  title: Empty/Invalid Business XpressID
+  category: validation
+- code: '267'
+  title: Empty / Invalid ContactReferenceCode
+  category: validation
+- code: '268'
+  title: Empty/Invalid ContactXpressID
+  category: validation
+- code: '269'
+  title: Empty/Invalid Noofshareholders
+  category: validation
+- code: '270'
+  title: Empty / Invalid ShareholderDocumentProof
+  category: validation
+- code: '271'
+  title: Empty/Invalid Shareholderdetails
+  category: validation
+- code: '272'
+  title: Empty/Invalid ShareholderType
+  category: validation
+- code: '273'
+  title: Empty/Invalid ShareholderName
+  category: validation
+- code: '274'
+  title: Empty/Invalid ShareholderShares
+  category: validation
+- code: '275'
+  title: Empty/Invalid IdentityProofDocumentType
+  category: validation
+- code: '276'
+  title: Empty / Invalid IdentityProof
+  category: validation
+- code: '277'
+  title: Empty/Invalid DateOfBirth
+  category: validation
+- code: '278'
+  title: Invalid MobileNumber
+  category: validation
+- code: '279'
+  title: Invalid JobTitle
+  category: validation
+- code: '280'
+  title: Empty/Invalid Address
+  category: validation
+- code: '281'
+  title: Empty / Invalid City
+  category: validation
+- code: '282'
+  title: Empty / Invalid Pincode
+  category: validation
+- code: '283'
+  title: Empty / Invalid Country
+  category: validation
+- code: '284'
+  title: Empty / Invalid NationalIdentityNumber
+  category: validation
+- code: '285'
+  title: Empty / Invalid Email
+  category: validation
+- code: '286'
+  title: Empty / Invalid File Name (Shareholder)
+  category: validation
+- code: '287'
+  title: Empty / Invalid File Name (ShareholderDetails)
+  category: validation
+- code: '288'
+  title: Account has been set as a default settlement account
+  category: validation
+- code: '289'
+  title: Empty / Invalid TaxId (BusinessProof)
+  category: validation
+- code: '290'
+  title: KYC Pending
+  category: validation
+- code: '291'
+  title: KYC Under Review
+  category: validation
+- code: '292'
+  title: KYC Rejected
+  category: validation
+- code: '293'
+  title: Business De-Active
+  category: validation
+- code: '294'
+  title: Business Suspended
+  category: validation
+- code: '295'
+  title: KYC Verified
+  category: validation
+- code: '296'
+  title: The entered KYC details are already in use
+  category: validation
+- code: '297'
+  title: Your document(s) has been processed successfully
+  category: validation
+- code: '298'
+  title: Empty/Invalid AccountDetails node
+  category: validation
+- code: '299'
+  title: Business Registered
+  category: validation
+- code: '300'
+  title: Contact Active| Contact added successfully | Contact modified successfully
+  category: validation
+- code: '301'
+  title: Empty / Invalid Company Name
+  category: validation
+- code: '302'
+  title: Empty / Invalid Reference Code
+  category: validation
+- code: '303'
+  title: Empty / Invalid Contact Person Name
+  category: validation
+- code: '305'
+  title: Empty / Invalid Company Email Address
+  category: validation
+- code: '306'
+  title: Empty / Invalid Mobile Number
+  category: validation
+- code: '307'
+  title: Invalid Notification Email Address or length exceeded
+  category: validation
+- code: '308'
+  title: Invalid Company Website
+  category: validation
+- code: '309'
+  title: Empty / Invalid Account No.
+  category: validation
+- code: '310'
+  title: Empty / Invalid BICCode
+  category: validation
+- code: '311'
+  title: Empty / Invalid Routing Number
+  category: validation
+- code: '313'
+  title: Empty / Invalid BusinessCode
+  category: validation
+- code: '314'
+  title: Empty/Invalid Contact XpressId
+  category: validation
+- code: '327'
+  title: Company email address already registered.
+  category: validation
+- code: '328'
+  title: Company Mobile Number already registered.
+  category: validation
+- code: '329'
+  title: Reference code already registered
+  category: validation
+- code: '330'
+  title: Account Number already registered
+  category: validation
+- code: '331'
+  title: Account Number already registered in business bank details.
+  category: validation
+- code: '332'
+  title: The contact has been blocked on PayMate for security reasons
+  category: validation
+- code: '333'
+  title: Saving Contact(s) failed
+  category: validation
+- code: '335'
+  title: Contact does not exists.
+  category: validation
+- code: '336'
+  title: Contact deletion failed.
+  category: validation
+- code: '337'
+  title: Empty/Invalid Contact Information Node
+  category: validation
+- code: '338'
+  title: Empty/Invalid BankAccountDetails Node
+  category: validation
+- code: '341'
+  title: KYC details are mandatory
+  category: validation
+- code: '342'
+  title: Empty / Invalid Business XpressId
+  category: validation
+- code: '343'
+  title: Empty/Invalid Nick Name
+  category: validation
+- code: '344'
+  title: Empty/Invalid Country Code
+  category: validation
+- code: '345'
+  title: Empty/Invalid ISD Code
+  category: validation
+- code: '346'
+  title: Invalid Company description or length exceeded
+  category: validation
+- code: '347'
+  title: Empty/Invalid Contact Type
+  category: validation
+- code: '348'
+  title: Empty/Invalid Account Holder Name
+  category: validation
+- code: '349'
+  title: Empty/Invalid Currency Code
+  category: validation
+- code: '350'
+  title: KYC Rejected
+  category: validation
+- code: '351'
+  title: KYC Under Review
+  category: validation
+- code: '354'
+  title: Blocked
+  category: validation
+- code: '355'
+  title: KYC Pending
+  category: validation
+- code: '356'
+  title: Empty/Invalid Account Branch City
+  category: validation
+- code: '357'
+  title: Empty/Invalid City
+  category: validation
+- code: '358'
+  title: Empty/Invalid Country
+  category: validation
+- code: '390'
+  title: KYC Verified
+  category: validation
+- code: '391'
+  title: Contact Suspended
+  category: validation
+- code: '392'
+  title: Contact Deleted
+  category: validation
+- code: '393'
+  title: Contact Rejected
+  category: validation
+- code: '394'
+  title: Awaiting for approval
+  category: validation
+- code: '401'
+  title: Invalid CompanyName
+  category: transaction
+- code: '402'
+  title: Invalid Account No
+  category: transaction
+- code: '403'
+  title: Invalid BIC Code
+  category: transaction
+- code: '404'
+  title: Contact Not Active
+  category: transaction
+- code: '405'
+  title: Account not active
+  category: transaction
+- code: '406'
+  title: Invalid Reference Code
+  category: transaction
+- code: '407'
+  title: Invalid XpressId
+  category: transaction
+- code: '408'
+  title: Empty/Invalid Invoice node
+  category: transaction
+- code: '409'
+  title: Invalid IssuerCode
+  category: transaction
+- code: '410'
+  title: Invalid invoice amount
+  category: transaction
+- code: '411'
+  title: Invalid debit amount
+  category: transaction
+- code: '412'
+  title: Invalid Notification Email Address/length exceeded
+  category: transaction
+- code: '413'
+  title: OrderId already processed
+  category: transaction
+- code: '414'
+  title: Transaction count exceeded
+  category: transaction
+- code: '415'
+  title: Transaction volume exceeded
+  category: transaction
+- code: '416'
+  title: You have not subscribed
+  category: transaction
+- code: '417'
+  title: Amount limit exceeded
+  category: transaction
+- code: '418'
+  title: Remarks length exceeded
+  category: transaction
+- code: '419'
+  title: Awaiting Settlement
+  category: transaction
+- code: '420'
+  title: Success Not Settled
+  category: transaction
+- code: '421'
+  title: Sent to bank
+  category: transaction
+- code: '422'
+  title: Aborted
+  category: transaction
+- code: '423'
+  title: Failed
+  category: transaction
+- code: '424'
+  title: Expired
+  category: transaction
+- code: '425'
+  title: Pending
+  category: transaction
+- code: '426'
+  title: Processing
+  category: transaction
+- code: '427'
+  title: Rejected
+  category: transaction
+- code: '428'
+  title: Awaiting to pay
+  category: transaction
+- code: '429'
+  title: Refunded into Xpress Account
+  category: transaction
+- code: '430'
+  title: On Hold
+  category: transaction
+- code: '431'
+  title: Batch sent to Bank
+  category: transaction
+- code: '432'
+  title: Batch Sent for Processing
+  category: transaction
+- code: '433'
+  title: Batch Processed
+  category: transaction
+- code: '434'
+  title: Refund Initiated
+  category: transaction
+- code: '435'
+  title: Refund Processed
+  category: transaction
+- code: '436'
+  title: Refund Aborted
+  category: transaction
+- code: '437'
+  title: Refund Rejected
+  category: transaction
+- code: '438'
+  title: Refund Pending
+  category: transaction
+- code: '439'
+  title: Refund Awaited
+  category: transaction
+- code: '440'
+  title: Refund Process Pending
+  category: validation
+- code: '441'
+  title: Refund Returned
+  category: validation
+- code: '442'
+  title: Reversed/chargeback
+  category: validation
+- code: '443'
+  title: Refund on Hold
+  category: validation
+- code: '444'
+  title: Refund Processing
+  category: validation
+- code: '445'
+  title: Invalid Request / Request failed
+  category: validation
+- code: '446'
+  title: Subscription Expired
+  category: validation
+- code: '500'
+  title: Server Error / Invalid or empty parameters
+  category: settlement
+- code: '501'
+  title: Invalid / Empty Request
+  category: settlement
+- code: '502'
+  title: Your OTP is successfully verified.
+  category: settlement
+- code: '503'
+  title: Empty/Invalid OTP
+  category: settlement
+- code: '504'
+  title: Failed to verify OTP
+  category: settlement
+- code: '505'
+  title: Empty / Invalid Token
+  category: settlement
+- code: '506'
+  title: Empty / Invalid Document
+  category: settlement
+- code: '507'
+  title: Invalid Merchant ID
+  category: settlement
+- code: '508'
+  title: Invalid BusinessCode
+  category: settlement
+- code: '509'
+  title: Invalid Start Date
+  category: settlement
+- code: '510'
+  title: Invalid End Date
+  category: settlement
+- code: '511'
+  title: Invalid Start / End Date
+  category: settlement
+- code: '512'
+  title: Invalid Page Number
+  category: settlement
+- code: '513'
+  title: Invalid Page Size
+  category: settlement
+- code: '514'
+  title: Record(s) not found
+  category: settlement
+- code: '515'
+  title: Empty / Invalid Terminals
+  category: settlement
+- code: '516'
+  title: Empty / Invalid Terminals Status
+  category: settlement
+- code: '517'
+  title: Business activation failed
+  category: settlement
+- code: '518'
+  title: No access to download report
+  category: settlement
+- code: '519'
+  title: Invalid File Type
+  category: settlement
+- code: '520'
+  title: Request Failed
+  category: settlement
+- code: '521'
+  title: Invalid IP Address
+  category: settlement
+- code: '522'
+  title: Empty / Invalid TransactionReferenceNo
+  category: settlement
+- code: '523'
+  title: Invalid cheque number
+  category: settlement
+- code: '524'
+  title: Empty/Invalid ChequeDate
+  category: settlement
+- code: '525'
+  title: Empty/Invalid ChequeAmount
+  category: settlement
+- code: '526'
+  title: Empty/Invalid ChequeBeneficiary
+  category: settlement
+- code: '527'
+  title: Empty/Invalid ChequePayableAt
+  category: settlement
+- code: '528'
+  title: Empty/Invalid OrderId
+  category: settlement
+- code: '529'
+  title: Empty/Invalid OTPReferenceNo
+  category: settlement
+- code: '530'
+  title: Empty/Invalid OTP Value
+  category: settlement
+- code: '531'
+  title: Empty/Invalid OTP Validity
+  category: settlement
+- code: '532'
+  title: Empty/Invalid OTP
+  category: settlement
+- code: '533'
+  title: Empty/Invalid Business code
+  category: settlement
+- code: '534'
+  title: Empty/Invalid PayModeType
+  category: settlement
+- code: '535'
+  title: Empty/Invalid DebitMode
+  category: settlement
+- code: '536'
+  title: Invalid VendorID
+  category: settlement
+- code: '537'
+  title: Transaction Status Pending
+  category: settlement
+- code: '538'
+  title: Transaction failed due to debit bank failure
+  category: settlement
+- code: '539'
+  title: Transaction failed due to credit bank failure
+  category: settlement
+- code: '540'
+  title: Transaction failed due to unavailability of funds
+  category: settlement
+- code: '541'
+  title: Transaction failed due to timeout at vendor site
+  category: settlement
+- code: '542'
+  title: Transaction failed due to transaction limit exceeded
+  category: settlement
+- code: '543'
+  title: Transaction failed due to system error at vendor site
+  category: settlement
+- code: '544'
+  title: Transaction failed due to invalid debit/credit details
+  category: settlement
+- code: '545'
+  title: Transaction failed due to invalid vendor details
+  category: settlement
+- code: '546'
+  title: Transaction failed due to invalid vendor response
+  category: settlement
+- code: '547'
+  title: Transaction failed due to invalid merchant ID
+  category: settlement
+- code: '548'
+  title: Transaction failed due to invalid business code
+  category: settlement
+- code: '549'
+  title: Transaction failed due to invalid transaction reference number
+  category: settlement
+- code: '550'
+  title: Transaction failed due to invalid cheque number
+  category: settlement
+- code: '551'
+  title: Transaction failed due to invalid cheque date
+  category: settlement
+- code: '552'
+  title: Transaction failed due to invalid cheque amount
+  category: settlement
+- code: '553'
+  title: Transaction failed due to invalid cheque beneficiary
+  category: settlement
+- code: '554'
+  title: Transaction failed due to invalid cheque payable at
+  category: settlement
+- code: '555'
+  title: Transaction failed due to invalid order ID
+  category: settlement
+- code: '556'
+  title: Transaction failed due to invalid OTP reference number
+  category: settlement
+- code: '557'
+  title: Transaction failed due to invalid OTP value
+  category: settlement
+- code: '558'
+  title: Transaction failed due to invalid OTP validity
+  category: settlement
+- code: '559'
+  title: Transaction failed due to invalid OTP
+  category: settlement
+- code: '560'
+  title: Transaction failed due to empty/invalid business code
+  category: settlement
+- code: '561'
+  title: Transaction failed due to empty/invalid pay mode type
+  category: validation
+- code: '562'
+  title: Transaction failed due to empty/invalid debit mode
+  category: validation
+- code: '563'
+  title: Transaction failed due to invalid vendor ID
+  category: validation
+- code: '564'
+  title: Transaction failed due to invalid vendor response
+  category: validation
+- code: '565'
+  title: Transaction failed due to invalid cheque status
+  category: validation
+- code: '566'
+  title: Transaction failed due to invalid cheque process date
+  category: validation
+- code: '567'
+  title: Transaction failed due to invalid transaction process date
+  category: validation
+- code: '568'
+  title: Transaction failed due to invalid transaction amount
+  category: validation
+- code: '569'
+  title: Transaction failed due to invalid cheque process date
+  category: validation
+- code: '570'
+  title: Transaction failed due to invalid transaction process date
+  category: validation
+- code: '571'
+  title: Transaction failed due to invalid transaction amount
+  category: validation
+- code: '572'
+  title: Transaction failed due to invalid debit details
+  category: validation
+- code: '573'
+  title: Transaction failed due to invalid credit details
+  category: validation
+- code: '574'
+  title: Transaction failed due to invalid business code
+  category: validation
+- code: '575'
+  title: Transaction failed due to invalid transaction reference number
+  category: validation
+- code: '576'
+  title: Transaction failed due to invalid cheque number
+  category: validation
+- code: '577'
+  title: Transaction failed due to invalid cheque date
+  category: validation
+- code: '578'
+  title: Transaction failed due to invalid cheque amount
+  category: validation
+- code: '579'
+  title: Transaction failed due to invalid cheque beneficiary
+  category: validation
+- code: '580'
+  title: Transaction failed due to invalid cheque payable at
+  category: validation
+- code: '581'
+  title: Transaction failed due to invalid order ID
+  category: validation
+- code: '582'
+  title: Transaction failed due to invalid OTP reference number
+  category: validation
+- code: '583'
+  title: Transaction failed due to invalid OTP value
+  category: validation
+- code: '584'
+  title: Transaction failed due to invalid OTP validity
+  category: validation
+- code: '585'
+  title: Transaction failed due to invalid OTP
+  category: validation
+- code: '586'
+  title: Transaction failed due to invalid pay mode type
+  category: validation
+- code: '587'
+  title: Transaction failed due to invalid debit mode
+  category: validation
+- code: '588'
+  title: Transaction failed due to invalid vendor ID
+  category: validation
+- code: '589'
+  title: Transaction failed due to invalid vendor response
+  category: validation
+- code: '590'
+  title: Transaction failed due to invalid cheque status
+  category: validation
+- code: '591'
+  title: Transaction failed due to invalid cheque process date
+  category: validation
+- code: '592'
+  title: Transaction failed due to invalid transaction process date
+  category: validation
+- code: '593'
+  title: Transaction failed due to invalid transaction amount
+  category: validation
+- code: '594'
+  title: Transaction failed due to invalid cheque process date
+  category: validation
+- code: '595'
+  title: Transaction failed due to invalid transaction process date
+  category: validation
+- code: '596'
+  title: Transaction failed due to invalid transaction amount
+  category: validation
+- code: '597'
+  title: Transaction failed due to invalid debit details
+  category: validation
+- code: '598'
+  title: Transaction failed due to invalid credit details
+  category: validation
+- code: '599'
+  title: Transaction failed due to invalid business code
+  category: validation
+- code: '600'
+  title: Transaction failed due to invalid transaction reference number
+  category: validation
+- code: '601'
+  title: Transaction failed due to invalid cheque number
+  category: validation
+- code: '602'
+  title: Transaction failed due to invalid cheque date
+  category: validation
+- code: '603'
+  title: Transaction failed due to invalid cheque amount
+  category: validation
+- code: '604'
+  title: Transaction failed due to invalid cheque beneficiary
+  category: validation
+- code: '605'
+  title: Transaction failed due to invalid cheque payable at
+  category: validation
+- code: '606'
+  title: Transaction failed due to invalid order ID
+  category: validation
+- code: '607'
+  title: Transaction failed due to invalid OTP reference number
+  category: validation
+- code: '608'
+  title: Transaction failed due to invalid OTP value
+  category: validation
+- code: '609'
+  title: Transaction failed due to invalid OTP validity
+  category: validation
+- code: '610'
+  title: Transaction failed due to invalid OTP
+  category: validation
+- code: '611'
+  title: Transaction failed due to invalid pay mode type
+  category: validation
+- code: '612'
+  title: Transaction failed due to invalid debit mode
+  category: validation
+- code: '613'
+  title: Transaction failed due to invalid vendor ID
+  category: validation
+- code: '614'
+  title: Transaction failed due to invalid vendor response
+  category: validation
+- code: '615'
+  title: Transaction failed due to invalid cheque status
+  category: validation
+- code: '616'
+  title: Transaction failed due to invalid cheque process date
+  category: validation
+- code: '617'
+  title: Transaction failed due to invalid transaction process date
+  category: validation
+- code: '618'
+  title: Transaction failed due to invalid transaction amount
+  category: validation
+- code: '619'
+  title: Transaction failed due to invalid cheque process date
+  category: validation
+- code: '620'
+  title: Transaction failed due to invalid transaction process date
+  category: validation
+- code: '621'
+  title: Transaction failed due to invalid transaction amount
+  category: validation
+- code: '622'
+  title: Transaction failed due to invalid debit details
+  category: validation
+- code: '623'
+  title: Transaction failed due to invalid credit details
+  category: validation
+- code: '624'
+  title: Transaction failed due to invalid business code
+  category: validation
+- code: '625'
+  title: Transaction failed due to invalid transaction reference number
+  category: validation
+- code: '626'
+  title: Transaction failed due to invalid cheque number
+  category: validation
+- code: '627'
+  title: Transaction failed due to invalid cheque date
+  category: validation
+- code: '628'
+  title: Transaction failed due to invalid cheque amount
+  category: validation
+- code: '629'
+  title: Transaction failed due to invalid cheque beneficiary
+  category: validation
+- code: '630'
+  title: Transaction failed due to invalid cheque payable at
+  category: validation
+- code: '631'
+  title: Transaction failed due to invalid order ID
+  category: validation
+- code: '632'
+  title: Transaction failed due to invalid OTP reference number
+  category: validation
+- code: '633'
+  title: Transaction failed due to invalid OTP value
+  category: validation
+- code: '634'
+  title: Transaction failed due to invalid OTP validity
+  category: validation
+- code: '635'
+  title: Transaction failed due to invalid OTP
+  category: validation
+- code: '636'
+  title: Transaction failed due to invalid pay mode type
+  category: validation
+- code: '637'
+  title: Transaction failed due to invalid debit mode
+  category: validation
+- code: '638'
+  title: Transaction failed due to invalid vendor ID
+  category: validation
+- code: '639'
+  title: Transaction failed due to invalid vendor response
+  category: validation
+- code: '640'
+  title: Transaction failed due to invalid cheque status
+  category: validation
+- code: '641'
+  title: Transaction failed due to invalid cheque process date
+  category: validation
+- code: '642'
+  title: Transaction failed due to invalid transaction process date
+  category: validation
+- code: '643'
+  title: Transaction failed due to invalid transaction amount
+  category: validation
+- code: '644'
+  title: Transaction failed due to invalid cheque process date
+  category: validation
+- code: '645'
+  title: Transaction failed due to invalid transaction process date
+  category: validation
+- code: '646'
+  title: Transaction failed due to invalid transaction amount
+  category: validation
+- code: '647'
+  title: Transaction failed due to invalid debit details
+  category: validation
+- code: '648'
+  title: Transaction failed due to invalid credit details
+  category: validation
+- code: '649'
+  title: Transaction failed due to invalid business code
+  category: validation
+- code: '650'
+  title: Transaction failed due to invalid transaction reference number
+  category: validation
+- code: '651'
+  title: Transaction failed due to invalid cheque number
+  category: validation
+- code: '652'
+  title: Transaction failed due to invalid cheque date
+  category: validation
+- code: '653'
+  title: Transaction failed due to invalid cheque amount
+  category: validation
+- code: '654'
+  title: Transaction failed due to invalid cheque beneficiary
+  category: validation
+- code: '655'
+  title: Transaction failed due to invalid cheque payable at
+  category: validation
+- code: '656'
+  title: Transaction failed due to invalid order ID
+  category: validation
+- code: '657'
+  title: Transaction failed due to invalid OTP reference number
+  category: validation
+- code: '658'
+  title: Transaction failed due to invalid OTP value
+  category: validation
+- code: '659'
+  title: Transaction failed due to invalid OTP validity
+  category: validation
+- code: '660'
+  title: Transaction failed due to invalid OTP
+  category: validation
+- code: '661'
+  title: Transaction failed due to invalid pay mode type
+  category: validation
+- code: '662'
+  title: Transaction failed due to invalid debit mode
+  category: validation
+- code: '663'
+  title: Transaction failed due to invalid vendor ID
+  category: validation
+- code: '664'
+  title: Transaction failed due to invalid vendor response
+  category: validation
+- code: '665'
+  title: Transaction failed due to invalid cheque status
+  category: validation
+- code: '666'
+  title: Transaction failed due to invalid cheque process date
+  category: validation
+- code: '667'
+  title: Transaction failed due to invalid transaction process date
+  category: validation
+- code: '668'
+  title: Transaction failed due to invalid transaction amount
+  category: validation
+- code: '669'
+  title: Transaction failed due to invalid cheque process date
+  category: validation
+- code: '670'
+  title: Transaction failed due to invalid transaction process date
+  category: validation
+- code: '671'
+  title: Transaction failed due to invalid transaction amount
+  category: validation
+- code: '672'
+  title: Transaction failed due to invalid debit details
+  category: validation
+- code: '673'
+  title: Transaction failed due to invalid credit details
+  category: validation
+- code: '674'
+  title: Transaction failed due to invalid business code
+  category: validation
+- code: '675'
+  title: Transaction failed due to invalid transaction reference number
+  category: validation
+- code: '676'
+  title: Transaction failed due to invalid cheque number
+  category: validation
+- code: '677'
+  title: Transaction failed due to invalid cheque date
+  category: validation
+- code: '678'
+  title: Transaction failed due to invalid cheque amount
+  category: validation
+- code: '679'
+  title: Transaction failed due to invalid cheque beneficiary
+  category: validation
+- code: '680'
+  title: Transaction failed due to invalid cheque payable at
+  category: validation
+- code: '681'
+  title: Transaction failed due to invalid order ID
+  category: validation
+- code: '682'
+  title: Transaction failed due to invalid OTP reference number
+  category: validation
+- code: '683'
+  title: Transaction failed due to invalid OTP value
+  category: validation
+- code: '684'
+  title: Transaction failed due to invalid OTP validity
+  category: validation
+- code: '685'
+  title: Transaction failed due to invalid OTP
+  category: validation
+- code: '686'
+  title: Transaction failed due to invalid pay mode type
+  category: validation
+- code: '687'
+  title: Transaction failed due to invalid debit mode
+  category: validation
+- code: '688'
+  title: Transaction failed due to invalid vendor ID
+  category: validation
+- code: '689'
+  title: Transaction failed due to invalid vendor response
+  category: validation
+- code: '690'
+  title: Transaction failed due to invalid cheque status
+  category: validation
+- code: '691'
+  title: Transaction failed due to invalid cheque process date
+  category: validation
+- code: '692'
+  title: Transaction failed due to invalid transaction process date
+  category: validation
+- code: '693'
+  title: Transaction failed due to invalid transaction amount
+  category: validation
+- code: '694'
+  title: Transaction failed due to invalid cheque process date
+  category: validation
+- code: '695'
+  title: Transaction failed due to invalid transaction process date
+  category: validation
+- code: '696'
+  title: Transaction failed due to invalid transaction amount
+  category: validation
+- code: '697'
+  title: Transaction failed due to invalid debit details
+  category: validation
+- code: '698'
+  title: Transaction failed due to invalid credit details
+  category: validation
+- code: '699'
+  title: Transaction failed due to invalid business code
+  category: validation
+- code: '700'
+  title: Transaction failed due to invalid transaction reference number
+  category: validation
+- code: '701'
+  title: Transaction failed due to invalid cheque number
+  category: validation
+- code: '702'
+  title: Transaction failed due to invalid cheque date
+  category: validation
+- code: '703'
+  title: Transaction failed due to invalid cheque amount
+  category: validation
+- code: '704'
+  title: Transaction failed due to invalid cheque beneficiary
+  category: validation
+- code: '705'
+  title: Transaction failed due to invalid cheque payable at
+  category: validation
+- code: '706'
+  title: Transaction failed due to invalid order ID
+  category: validation
+- code: '707'
+  title: Transaction failed due to invalid OTP reference number
+  category: validation
+- code: '708'
+  title: Transaction failed due to invalid OTP value
+  category: validation
+- code: '709'
+  title: Transaction failed due to invalid OTP validity
+  category: validation
+- code: '710'
+  title: Transaction failed due to invalid OTP
+  category: validation
+- code: '711'
+  title: Transaction failed due to invalid pay mode type
+  category: validation
+- code: '712'
+  title: Transaction failed due to invalid debit mode
+  category: validation
+- code: '713'
+  title: Transaction failed due to invalid vendor ID
+  category: validation
+- code: '714'
+  title: Transaction failed due to invalid vendor response
+  category: validation
+- code: '715'
+  title: Transaction failed due to invalid cheque status
+  category: validation
+- code: '716'
+  title: Transaction failed due to invalid cheque process date
+  category: validation
+- code: '717'
+  title: Transaction failed due to invalid transaction process date
+  category: validation
+- code: '718'
+  title: Transaction failed due to invalid transaction amount
+  category: validation
+- code: '719'
+  title: Transaction failed due to invalid cheque process date
+  category: validation
+- code: '720'
+  title: Transaction failed due to invalid transaction process date
+  category: validation
+- code: '721'
+  title: Transaction failed due to invalid transaction amount
+  category: validation
+- code: '722'
+  title: Transaction failed due to invalid debit details
+  category: validation
+- code: '723'
+  title: Transaction failed due to invalid credit details
+  category: validation
+- code: '724'
+  title: Transaction failed due to invalid business code
+  category: validation
+- code: '725'
+  title: Transaction failed due to invalid transaction reference number
+  category: validation
+- code: '726'
+  title: Transaction failed due to invalid cheque number
+  category: validation
+- code: '727'
+  title: Transaction failed due to invalid cheque date
+  category: validation
+- code: '728'
+  title: Transaction failed due to invalid cheque amount
+  category: validation
+- code: '729'
+  title: Transaction failed due to invalid cheque beneficiary
+  category: validation
+- code: '730'
+  title: Transaction failed due to invalid cheque payable at
+  category: validation
+- code: '731'
+  title: Transaction failed due to invalid order ID
+  category: validation
+- code: '732'
+  title: Transaction failed due to invalid OTP reference number
+  category: validation
+- code: '733'
+  title: Transaction failed due to invalid OTP value
+  category: validation
+- code: '734'
+  title: Transaction failed due to invalid OTP validity
+  category: validation
+- code: '735'
+  title: Transaction failed due to invalid OTP
+  category: validation
+- code: '736'
+  title: Transaction failed due to invalid pay mode type
+  category: validation
+- code: '737'
+  title: Transaction failed due to invalid debit mode
+  category: validation
+- code: '738'
+  title: Transaction failed due to invalid vendor ID
+  category: validation
+- code: '739'
+  title: Transaction failed due to invalid vendor response
+  category: validation
+- code: '740'
+  title: Transaction failed due to invalid cheque status
+  category: validation
+- code: '741'
+  title: Transaction failed due to invalid cheque process date
+  category: validation
+- code: '742'
+  title: Transaction failed due to invalid transaction process date
+  category: validation
+- code: '743'
+  title: Transaction failed due to invalid transaction amount
+  category: validation
+- code: '744'
+  title: Transaction failed due to invalid cheque process date
+  category: validation
+- code: '745'
+  title: Transaction failed due to invalid transaction process date
+  category: validation
+- code: '746'
+  title: Transaction failed due to invalid transaction amount
+  category: validation
+- code: '747'
+  title: Transaction failed due to invalid debit details
+  category: validation
+- code: '748'
+  title: Transaction failed due to invalid credit details
+  category: validation
+- code: '749'
+  title: Transaction failed due to invalid business code
+  category: validation
+- code: '750'
+  title: Transaction failed due to invalid transaction reference number
+  category: validation
+- code: '751'
+  title: Transaction failed due to invalid cheque number
+  category: validation
+- code: '752'
+  title: Transaction failed due to invalid cheque date
+  category: validation
+- code: '753'
+  title: Transaction failed due to invalid cheque amount
+  category: validation
+- code: '754'
+  title: Transaction failed due to invalid cheque beneficiary
+  category: validation
+- code: '755'
+  title: Transaction failed due to invalid cheque payable at
+  category: validation
+- code: '756'
+  title: Transaction failed due to invalid order ID
+  category: validation
+- code: '757'
+  title: Transaction failed due to invalid OTP reference number
+  category: validation
+- code: '758'
+  title: Transaction failed due to invalid OTP value
+  category: validation
+- code: '759'
+  title: Transaction failed due to invalid OTP validity
+  category: validation
+- code: '760'
+  title: Transaction failed due to invalid OTP
+  category: validation
+- code: '761'
+  title: Transaction failed due to invalid pay mode type
+  category: validation
+- code: '762'
+  title: Transaction failed due to invalid debit mode
+  category: validation
+- code: '763'
+  title: Transaction failed due to invalid vendor ID
+  category: validation
+- code: '764'
+  title: Transaction failed due to invalid vendor response
+  category: validation
+- code: '765'
+  title: Transaction failed due to invalid cheque status
+  category: validation
+- code: '766'
+  title: Transaction failed due to invalid cheque process date
+  category: validation
+- code: '767'
+  title: Transaction failed due to invalid transaction process date
+  category: validation
+- code: '768'
+  title: Transaction failed due to invalid transaction amount
+  category: validation
+- code: '769'
+  title: Transaction failed due to invalid cheque process date
+  category: validation
+- code: '770'
+  title: Transaction failed due to invalid transaction process date
+  category: validation
+- code: '771'
+  title: Transaction failed due to invalid transaction amount
+  category: validation
+- code: '772'
+  title: Transaction failed due to invalid debit details
+  category: validation
+- code: '773'
+  title: Transaction failed due to invalid credit details
+  category: validation
+- code: '774'
+  title: Transaction failed due to invalid business code
+  category: validation
+- code: '775'
+  title: Transaction failed due to invalid transaction reference number
+  category: validation
+- code: '776'
+  title: Transaction failed due to invalid cheque number
+  category: validation
+- code: '777'
+  title: Transaction failed due to invalid cheque date
+  category: validation
+- code: '778'
+  title: Transaction failed due to invalid cheque amount
+  category: validation
+- code: '779'
+  title: Transaction failed due to invalid cheque beneficiary
+  category: validation
+- code: '780'
+  title: Transaction failed due to invalid cheque payable at
+  category: validation
+- code: '781'
+  title: Transaction failed due to invalid order ID
+  category: validation
+- code: '782'
+  title: Transaction failed due to invalid OTP reference number
+  category: validation
+- code: '783'
+  title: Transaction failed due to invalid OTP value
+  category: validation
+- code: '784'
+  title: Transaction failed due to invalid OTP validity
+  category: validation
+- code: '785'
+  title: Transaction failed due to invalid OTP
+  category: validation
+- code: '786'
+  title: Transaction failed due to invalid pay mode type
+  category: validation
+- code: '787'
+  title: Transaction failed due to invalid debit mode
+  category: validation
+- code: '788'
+  title: Transaction failed due to invalid vendor ID
+  category: validation
+- code: '789'
+  title: Transaction failed due to invalid vendor response
+  category: validation
+- code: '790'
+  title: Transaction failed due to invalid cheque status
+  category: validation
+- code: '791'
+  title: Transaction failed due to invalid cheque process date
+  category: validation
+- code: '792'
+  title: Transaction failed due to invalid transaction process date
+  category: validation
+- code: '793'
+  title: Transaction failed due to invalid transaction amount
+  category: validation
+- code: '794'
+  title: Transaction failed due to invalid cheque process date
+  category: validation
+- code: '795'
+  title: Transaction failed due to invalid transaction process date
+  category: validation
+- code: '796'
+  title: Transaction failed due to invalid transaction amount
+  category: validation
+- code: '797'
+  title: Transaction failed due to invalid debit details
+  category: validation
+- code: '798'
+  title: Transaction failed due to invalid credit details
+  category: validation
+- code: '799'
+  title: Transaction failed due to invalid business code
+  category: validation
+- code: '800'
+  title: Transaction failed due to invalid transaction reference number
+  category: validation

@@ -1,0 +1,77 @@
+generated: '2026-08-26'
+method: searched
+source: https://api.paymate.my/GlobalPartnerAPI (Authentication + Data Security sections); https://paymate.in/paymateapi/APIDoc.html (Authentication section)
+docs:
+- https://api.paymate.my/GlobalPartnerAPI
+- https://paymate.in/paymateapi/APIDoc.html
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+  oauth2: false
+  openid_connect: false
+  mutual_tls: false
+  self_service: false
+  note: >-
+    Neither PayMate API is self-service. Credentials for both are issued by PayMate after commercial
+    onboarding and KYC, and the India API additionally requires the calling domain or IP to be whitelisted.
+apis:
+- api: PayMate Global Partner API
+  scheme: PartnerApiKey
+  type: apiKey
+  in: header
+  parameter: Authorization
+  verified: false
+  how_to_obtain: >-
+    "The PayMate API uses secret API Key to authenticate requests. Partner/Merchant will get their secret
+    API Keys after successful onboarding by writing to us at <regional support address>" — Authentication
+    section of the Partner API documentation app. Regional addresses: support@paymate.sg, support@paymate.my,
+    support@paymate.ae, support@paymate.om, support@dunomo.au, support@dunomo.za.
+  evidence: >-
+    The exact header NAME is not published. An unauthenticated POST to https://api.paymate.my/v1/Countrylist
+    on 2026-08-26 returned HTTP 401 with {"RequestID":null,"StatusCode":"106","Description":"Empty/Invalid
+    header credentials","DetailedSummary":{}} — confirming header-carried credentials but not naming the
+    header. The `Authorization` header recorded in the OpenAPI securityScheme is our placeholder and is
+    marked x-verified false; confirm with PayMate before integrating.
+  transport_security: >-
+    "The PayMate system will use hybrid encryption and decryption methodology. Hybrid encryption is the
+    combination of symmetric and asymmetric encryption" — Data Security section. The key exchange and
+    algorithm parameters are not published.
+- api: PayMate India Business Payments API (PMXClients)
+  scheme: MultiHeaderCredentials
+  type: apiKey
+  in: header
+  verified: true
+  parameters:
+  - name: MerchantIdentification
+    description: 32-digit alphanumeric merchant identifier issued by PayMate.
+    required: true
+  - name: TerminalIdentification
+    description: 32-digit alphanumeric terminal identifier issued by PayMate.
+    required: true
+  - name: XpressID
+    description: 10-digit alphanumeric PayMate account identifier.
+    required: true
+  - name: Email
+    description: >-
+      The registered signup email. Where an account has multiple users, passing that user's email applies
+      that user's role permissions; when absent the API assumes the Admin role.
+    required: true
+  payload_encryption: >-
+    Request and response JSON bodies are encrypted with AES-256 using a per-account key and IV published
+    in the account's Account Settings > API Settings screen. The documentation states the key and IV can be
+    rotated by PayMate at any time.
+  network_controls: >-
+    The calling domain name or IP address must be whitelisted on the account before any call succeeds; error
+    code 192 is "No Method Access for ip" and 129 is "Request from invalid Source". The number of domains
+    permitted is a plan attribute (1 / 3 / 5 domains — see plans/paymate-plans-pricing.yml).
+  how_to_obtain: >-
+    Sign up, complete KYC verification, upgrade to a plan that includes API access, then whitelist the
+    calling domain/IP. Keys then appear under Account Settings > API Settings.
+gaps:
+- No OAuth 2.0, OpenID Connect or mTLS on either surface.
+- No published scope or permission model; authorization is role-based inside the PayMate account.
+- No published key-rotation procedure, key-prefix convention, or token expiry for the Global Partner API key.
+- The Global Partner API's credential header name is undocumented, so an integrator cannot write a client
+  from the public documentation alone.

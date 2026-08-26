@@ -1,0 +1,79 @@
+generated: '2026-08-26'
+method: searched
+source: https://paymate.in/Pricing_terms.html (clause 9 fee schedule); https://paymate.in/paymateapi/APIDoc.html (error codes)
+docs: https://paymate.in/Pricing_terms.html
+note: >-
+  PayMate publishes no HTTP rate limit — no requests-per-second/minute figure, no burst allowance, no
+  X-RateLimit-*/RateLimit-*/Retry-After response header and no dedicated 429 status appear anywhere in either
+  API's documentation, and none was observed on a live unauthenticated probe of
+  https://api.paymate.my/v1/Countrylist on 2026-08-26. What PayMate does publish is a set of COMMERCIAL
+  volume caps attached to the subscription plan, plus a source-address allowlist whose size is also a plan
+  attribute. Those are recorded below because they are the real ceiling an integrator hits, but an agent gets
+  no runtime signal that it is approaching one.
+limit_count: 6
+limits:
+- scope: per-account (monthly quota)
+  plan: Try and Buy
+  window: 30 days
+  limit: 25 transactions (AR+AP)
+  burst: null
+  overage: no transactions permitted past the limit
+  additional:
+    max_amount_per_transaction: 10000 INR
+    total_amount_transacted: 100000 INR
+- scope: per-account (monthly quota)
+  plan: SME Plan 499
+  window: month
+  limit: 500 transactions (AR+AP)
+  burst: null
+  overage: Rs. 10 per additional transaction
+- scope: per-account (monthly quota)
+  plan: Basic API
+  window: month
+  limit: 1000 transactions (AR+AP)
+  burst: null
+  overage: Rs. 10 per additional transaction
+- scope: per-account (monthly quota)
+  plan: Enterprise API
+  window: month
+  limit: 3000 transactions (AR+AP)
+  burst: null
+  overage: Rs. 10 per additional transaction
+- scope: per-transaction (payment rail)
+  plan: all
+  window: per transaction
+  limit: IMPS capped at Rs. 2 lakh per transaction
+  burst: null
+- scope: per-account (source allowlist)
+  plan: Basic API 1 domain / Enterprise API 3 domains / Enterprise Custom 5 domains
+  window: n/a
+  limit: number of domains or IP addresses permitted to call the API
+  burst: null
+  note: >-
+    The India API rejects calls from an unlisted source with error code 129 "Request from invalid Source"
+    and 192 "No Method Access for ip".
+response_headers:
+  published: none
+  observed: none
+  probe: POST https://api.paymate.my/v1/Countrylist — HTTP 401, no rate-limit headers in the response.
+exhaustion:
+  status_code: not published
+  error_codes:
+  - code: '140'
+    api: Global Partner API
+    description: Amount limit exceeded
+  - code: '417'
+    api: Global Partner API
+    description: Amount limit exceeded
+  - code: '542'
+    api: Global Partner API
+    description: Transaction failed due to transaction limit exceeded
+  - code: '180'
+    api: India API
+    description: Amount limit exceeded
+gaps:
+- No per-second/per-minute request limit is published for either API.
+- No rate-limit response headers, so a client cannot pace itself.
+- No documented 429 behaviour or Retry-After guidance.
+- Monthly quotas are commercial and enforced through billing (Rs. 10/transaction overage), not through the
+  HTTP surface.

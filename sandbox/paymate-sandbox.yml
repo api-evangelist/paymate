@@ -1,0 +1,83 @@
+generated: '2026-08-26'
+method: searched
+source: https://api.paymate.my/GlobalPartnerAPI (API Development Environment); https://paymate.in/paymateapi/APIDoc.html (API Development Environment)
+docs:
+- https://api.paymate.my/GlobalPartnerAPI
+- https://paymate.in/paymateapi/APIDoc.html
+published: true
+self_service: false
+environments:
+- name: Development (UAT)
+  api: PayMate India Business Payments API
+  base_url: https://uat.paymate.co.in/PayMateSite/PayMateService/PMXClients.svc/PMXClients/
+  reachable: false
+  reachability_note: >-
+    DNS resolves (43.242.212.84) but every HTTPS connection from a general-purpose network timed out on
+    2026-08-26. PayMate requires the calling domain or IP to be whitelisted on the account before the host
+    answers, which is the most likely explanation. Probed once, not retried.
+  access: >-
+    "Every registered business on PayMate will have access to the Development environment of the API
+    platform." Requires signup, KYC verification and a plan that includes API access.
+  behaviour: >-
+    "The Development environment is a simulated environment i.e all the API methods have predefined request
+    parameters and response parameters. You will not be able to add/delete any records using the API methods
+    on the Development environment."
+  credentials:
+    published: true
+    kind: shared demo credentials printed in the public documentation
+    parameters:
+    - MerchantIdentification (32-char alphanumeric)
+    - TerminalIdentification (32-char alphanumeric)
+    - XpressID (10-char, documented as DBRV000001)
+    - Email (documented as paymateapi@paymate.co.in)
+    encryption:
+      algorithm: AES-256 (key + IV)
+      published: true
+      note: >-
+        A demo AES key and IV are printed in the public documentation page. Their values are deliberately not
+        reproduced in this repository. PayMate notes the key and IV can be rotated at any time.
+- name: Development
+  api: PayMate Global Partner API
+  base_url: not published
+  reachable: unknown
+  access: >-
+    "For quick and seamless API integration every registered business on PayMate will have access to the
+    Development environment of the API platform. The Development environment will help businesses to develop,
+    integrate and test the existing and new API methods before moving to production."
+  credentials:
+    published: false
+    note: >-
+      Partner API keys are issued by PayMate after onboarding, by email to the regional support address. No
+      development host, no test key and no self-service key issuance is published.
+  observed_non_production_hosts:
+  - devsgp.paymateb2b.com
+  - devmys.paymateb2b.com
+  - devaus.paymateb2b.com
+  - devuae.paymateb2b.com
+  - devomn.paymateb2b.com
+  - devzaf.paymateb2b.com
+  - dev.paymate.in (CNAME paymatedev.trafficmanager.net)
+  observed_note: >-
+    These hosts are named in the host-to-region switch inside PayMate's own documentation app bundle
+    (https://api.paymate.my/GlobalPartnerAPI/static/js/main.d40c1507.js). They are recorded as observed
+    infrastructure, NOT as an invitation — PayMate does not publish them as a sandbox and they were not probed.
+test_data:
+  test_cards:
+    published: false
+    note: >-
+      No test card numbers, test bank accounts, magic identifiers or trigger values are published for either
+      API. The card tokenization operation (POST /v1/AddCard) is additionally restricted — "Only PCI certified
+      customer can use this api" — so an integrator that is not itself PCI certified cannot exercise the card
+      path at all.
+  test_clock: false
+  fixtures: false
+  triggers: false
+key_prefixes:
+  published: false
+  note: No test-vs-live key prefix convention (no pk_test/sk_live equivalent) is published.
+gaps:
+- No self-service sandbox; a plan purchase and KYC are prerequisites for any API access.
+- No test cards, test accounts or trigger values.
+- No published development base URL for the Global Partner API.
+- The India UAT host is not reachable without IP/domain whitelisting, so the published sandbox cannot be
+  exercised from the public internet.

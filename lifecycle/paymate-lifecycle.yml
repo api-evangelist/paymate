@@ -1,0 +1,69 @@
+generated: '2026-08-26'
+method: searched
+source: https://api.paymate.my/GlobalPartnerAPI; https://paymate.in/paymateapi/APIDoc.html; https://paymate.in/
+versioning:
+  scheme: URI path
+  current_version: v1
+  api: PayMate Global Partner API
+  evidence: All 25 operations are prefixed /v1/. No version header, no media-type versioning, no dated releases.
+  legacy:
+    api: PayMate India Business Payments API
+    scheme: none
+    evidence: >-
+      PMXClients.svc carries no version segment. The service is a WCF endpoint under
+      /PayMateSite/PayMateService/; method names are appended directly to the path.
+generational_change:
+  observed: true
+  note: >-
+    PayMate has in effect shipped a second-generation API without announcing a deprecation. The India API
+    (PMXClients, AES-256 encrypted payloads, MerchantIdentification/TerminalIdentification/XpressID headers,
+    12 methods, examples dated 2018) and the Global Partner API (v1, secret API key, 25 operations, six
+    regional hosts) are different products with different envelopes, different identifiers (XpressID vs
+    PMXID/BusinessXpressID) and different error registries (58 codes vs 508). Neither documentation set
+    references the other, and no migration guide exists. The India documentation page is still served and
+    still the only PayMate API documentation reachable from paymate.in.
+deprecation_policy:
+  published: false
+  sunset_header: not published
+  deprecation_header: not published
+  rfc8594: false
+  evidence: >-
+    No deprecation, sunset, end-of-life or breaking-change policy is published on either documentation
+    surface. No Deprecation or Sunset response header is documented, and no operation in either API is
+    marked deprecated.
+deprecated_operations: []
+status_page:
+  published: false
+  evidence: >-
+    No status.paymate.in / status.paymate.co.in / statuspage host resolves, and no status or uptime page is
+    linked from paymate.in, from the Partner API documentation app, or from any regional site. DNS lookups
+    for status.paymate.in returned NXDOMAIN on 2026-08-26.
+sla:
+  published: false
+  note: >-
+    No uptime or latency commitment is published. The Payment Terms commit only to payout timing (card,
+    debit-card and net-banking transactions credited to the payee within 48 hours, NEFT/RTGS/IMPS during
+    banking hours) — a settlement schedule, not an API SLA.
+    Source: https://paymate.in/Pricing_terms.html clause 10.
+support:
+  channels:
+  - email: support@paymate.co.in (India platform support)
+  - email: info@paymate.co.in (general)
+  - email: sales@paymate.co.in
+  - regional partner API support: support@paymate.sg, support@paymate.my, support@paymate.ae,
+      support@paymate.om, support@dunomo.au, support@dunomo.za
+  page: https://paymate.in/contactus.html
+changelog:
+  published: false
+  evidence: >-
+    No changelog, release notes or "what's new" page exists on paymate.in or in the Partner API
+    documentation app. The most recent post on https://paymate.in/blog.html is dated 8 March 2023.
+account_termination:
+  note: >-
+    PayMate reserves the right to terminate unpaid accounts inactive for 120 continuous days, with prior
+    notice and an option to back up data (Payment Terms clause 9).
+gaps:
+- No deprecation or sunset policy for either API generation.
+- No status page and no SLA.
+- No changelog; an integrator cannot tell when the Global Partner API last changed.
+- Two live API generations with no published relationship, migration path or retirement date for the older one.

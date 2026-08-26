@@ -1,0 +1,95 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements — PayMate Global Partner API
+  version: 1.0.0
+  x-generated: '2026-08-26'
+  x-method: generated
+  x-source: openapi/paymate-global-partner-api-openapi.yml
+  x-note: >-
+    Applies to openapi/paymate-global-partner-api-openapi.yml. Captures the API Evangelist enrichment layer —
+    agent consequence classes, reversibility warnings, the shared error-envelope reference and the
+    undocumented-credential caveat — without mutating the generated specification. Nothing here changes what
+    PayMate published; it annotates it.
+extends: ./../openapi/paymate-global-partner-api-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-api-evangelist:
+      profile: https://apis.io/provider/paymate
+      artifacts:
+        errors: errors/paymate-error-codes.yml
+        conventions: conventions/paymate-conventions.yml
+        authentication: authentication/paymate-authentication.yml
+        data_model: data-model/paymate-data-model.yml
+        rate_limits: rate-limits/paymate-rate-limits.yml
+        plans: plans/paymate-plans-pricing.yml
+        conformance: conformance/paymate-conformance.yml
+        lifecycle: lifecycle/paymate-lifecycle.yml
+        sandbox: sandbox/paymate-sandbox.yml
+- target: $.components.securitySchemes.PartnerApiKey
+  update:
+    x-agent-warning: >-
+      The credential header name is NOT published by PayMate. Do not generate a client from this scheme
+      without confirming the header with PayMate partner support.
+- target: $.paths['/v1/MakePayment'].post
+  update:
+    x-agentic-access:
+      action_class: money-movement
+      consequence: high
+      reversible: false
+      reversal_operation: null
+      escalation: human-approval-required
+      note: >-
+        Debits an enrolled commercial credit card and initiates a payout to a vendor bank account. PayMate
+        publishes no refund, void or cancel operation. A duplicate OrderID is rejected with StatusCode 413.
+- target: $.paths['/v1/VendorPayment'].post
+  update:
+    x-agentic-access:
+      action_class: money-movement
+      consequence: high
+      reversible: false
+      escalation: human-approval-required
+- target: $.paths['/v1/collectpayments'].post
+  update:
+    x-agentic-access:
+      action_class: write
+      consequence: medium
+      reversible: false
+      note: Issues a collection request to a customer; no cancel operation is published.
+- target: $.paths['/v1/deletebusiness'].post
+  update:
+    x-agentic-access:
+      action_class: destructive
+      consequence: high
+      reversible: false
+      escalation: human-approval-required
+- target: $.paths['/v1/DeleteContact'].post
+  update:
+    x-agentic-access:
+      action_class: destructive
+      consequence: medium
+      reversible: false
+      escalation: human-approval-required
+- target: $.paths['/v1/Deletecard'].post
+  update:
+    x-agentic-access:
+      action_class: destructive
+      consequence: medium
+      reversible: false
+      escalation: human-approval-required
+- target: $.paths['/v1/AddCard'].post
+  update:
+    x-agentic-access:
+      action_class: write
+      consequence: high
+      reversible: true
+      reversal_operation: DeleteCard
+      note: >-
+        Accepts a raw PAN and CVV. PayMate restricts this operation to PCI-certified callers and returns a
+        3-D Secure challenge form the caller must render.
+- target: $.paths['/v1/Countrylist'].post
+  update:
+    x-agentic-access:
+      action_class: read
+      consequence: none
+      reversible: true

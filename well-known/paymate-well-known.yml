@@ -1,0 +1,145 @@
+generated: '2026-08-26'
+method: probed
+source: direct HTTPS probes of every PayMate host in apis.yml and openapi servers[]
+checked: '2026-08-26'
+note: >-
+  No PayMate host serves any /.well-known/ document. Every path below returned HTTP 404 with a zero-length
+  or standard-error body, except on uat.paymate.co.in which did not answer at all. No WellKnown, SecurityTxt
+  or APICatalog pointer is wired into apis.yml, because this file records an absence rather than a presence.
+hosts:
+- host: paymate.in
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+  - path: /llms.txt
+    status: 404
+    file: null
+- host: www.paymate.in
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+- host: api.paymate.my
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+  - path: /llms.txt
+    status: 404
+    file: null
+  - path: /robots.txt
+    status: 404
+    file: null
+- host: uat.paymate.co.in
+  note: >-
+    Resolves to 43.242.212.84 but every HTTPS connection timed out after 10s from a general-purpose network.
+    This is consistent with PayMate's own documented requirement that the calling domain or IP be whitelisted
+    before the API host will answer. Not retried.
+  documents:
+  - path: /.well-known/security.txt
+    status: <no response>
+    file: null
+  - path: /.well-known/agent-card.json
+    status: <no response>
+    file: null
+  - path: /openapi.json
+    status: <no response>
+    file: null
+- host: paymate.ae
+  note: >-
+    Regional site linked from https://paymate.in/Pricing_terms.html. Every HTTPS connection timed out after
+    10-12s. Not retried.
+  documents:
+  - path: /.well-known/security.txt
+    status: <no response>
+    file: null
+  - path: /.well-known/agent-card.json
+    status: <no response>
+    file: null
+  - path: /llms.txt
+    status: <no response>
+    file: null
+other_probes:
+- url: https://api.paymate.my/openapi.json
+  status: 404
+- url: https://api.paymate.my/graphql
+  status: 404
+- url: https://api.paymate.my/mcp
+  status: 404
+- url: https://paymate.in/mcp
+  status: 404
+- url: https://paymate.in/openapi.json
+  status: 404
+- url: https://paymate.in/swagger.json
+  status: 404
+- url: https://paymate.in/api-docs
+  status: 404
+- url: https://uat.paymate.co.in/PayMateSite/PayMateService/PMXClients.svc?wsdl
+  status: <no response>
+  note: >-
+    The India API is a WCF .svc service, so a ?wsdl / ?singleWsdl metadata endpoint is plausible, but the host
+    does not answer HTTPS without IP/domain whitelisting. Probed once at 8s, connection timed out, not
+    retried. Whether PayMate exposes a SOAP contract there is therefore UNKNOWN, not absent.
+- url: https://paymate.in/robots.txt
+  status: 200
+  note: >-
+    Served, and it disallows /APIs/, /PaymateService/, /PaymateCardProcess/ and /Signup/ among others. Not a
+    /.well-known/ document; recorded here because it is the only machine-readable file paymate.in serves.

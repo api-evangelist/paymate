@@ -1,0 +1,153 @@
+generated: '2026-08-26'
+method: searched
+source: https://api.paymate.my/GlobalPartnerAPI; https://paymate.in/paymateapi/APIDoc.html; derived from openapi/paymate-global-partner-api-openapi.yml
+apis:
+- PayMate Global Partner API
+- PayMate India Business Payments API (PMXClients)
+transport:
+  style: JSON-over-POST RPC
+  note: >-
+    Neither surface is resource-oriented REST. Every operation on both APIs is an HTTP POST to a named
+    method path with a JSON body; there are no GET/PUT/PATCH/DELETE verbs, no path parameters and no query
+    parameters. Deletion is a POST (/v1/deletebusiness, /v1/DeleteContact, /v1/Deletecard).
+  content_type: application/json
+  http_status_usage: >-
+    HTTP 200 is returned for both success and business failure; the outcome is in the body. HTTP 401 is
+    returned when credential headers are missing (observed on POST https://api.paymate.my/v1/Countrylist,
+    2026-08-26).
+authentication:
+  style: secret API key in a request header (Global Partner API); four issued header credentials plus
+    AES-256 payload encryption (India API)
+  see: authentication/paymate-authentication.yml
+error_envelope:
+  global_partner_api:
+    fields: [RequestID, StatusCode, Description, DetailedSummary]
+    success_code: '000'
+    code_count: 508
+  india_api:
+    fields: [XpressID, ErrorCode, ErrorDescription, Response]
+    success_code: '000'
+    code_count: 58
+  format: proprietary
+  rfc9457: false
+  see: errors/paymate-error-codes.yml
+idempotency:
+  supported: partial
+  grade: partial
+  mechanism: client-supplied unique key with duplicate rejection
+  keys:
+  - field: RequestID
+    scope: every operation
+    required: true
+    description: '"A unique request no from the partner to track the request" — mandatory on all 25 Global
+      Partner API operations and echoed back in the response.'
+  - field: OrderID
+    scope: payment and collection creation
+    required: true
+    description: Client-generated order identifier on MakePayments and CollectPayment.
+  duplicate_signal:
+    code: '413'
+    message: OrderId already processed
+    api: PayMate Global Partner API
+  legacy_duplicate_signal:
+    code: '227'
+    message: OrderID Already Exsits.
+    api: PayMate India Business Payments API
+  what_is_guaranteed: >-
+    A repeat submission carrying an OrderID that has already been processed is rejected rather than creating
+    a second payment, so a retried write cannot double-pay a vendor.
+  what_is_not_guaranteed: >-
+    PayMate does NOT document replay semantics (a retry does not return the original response body), does not
+    publish a retention window for used keys, does not define an Idempotency-Key header, and does not state
+    whether RequestID is checked for uniqueness at all. Treat the guarantee as duplicate suppression on the
+    payment/collection write path only.
+pagination:
+  style: date-range filter
+  supported: partial
+  note: >-
+    The report operations (PaymentReport / v1/PaymentHistory, CollectionReport / v1/CollectHistory) are
+    filtered by FromDate/ToDate and by identifier, not paged. No page/offset/cursor parameter, no page-size
+    parameter and no total-count or next-link field appear anywhere in the published surface. Error code 235
+    "Invalid Date Range" is the only bound signalled.
+filtering:
+  by: [OrderID, PayMateRequestNo, BusinessCode, FromDate, ToDate]
+field_expansion:
+  supported: false
+sparse_fields:
+  supported: false
+metadata:
+  supported: false
+  note: No customer-defined metadata/tags field is exposed on any object.
+request_tracing:
+  supported: true
+  field: RequestID
+  note: >-
+    Partner-supplied, mandatory, echoed on the response. There is no server-generated correlation id and no
+    request-id response HEADER, so tracing depends on the partner minting and storing the value itself.
+versioning:
+  style: URI path
+  current: v1
+  note: All Global Partner API paths are prefixed /v1/. The India API is unversioned — the version lives in
+    the service path (PMXClients.svc). No version header, no dated releases, no changelog.
+  see: lifecycle/paymate-lifecycle.yml
+rate_limit_signaling:
+  headers: none published
+  note: >-
+    No X-RateLimit-*, RateLimit-* or Retry-After header is documented and none was observed. Volume limits
+    are commercial (per-plan monthly transaction caps) rather than per-second HTTP limits.
+  see: rate-limits/paymate-rate-limits.yml
+dry_run_mode:
+  supported: false
+  note: >-
+    No preview/simulate/validate-only flag exists on any write operation. PayMate instead provides a separate
+    non-production Development environment (see sandbox/paymate-sandbox.yml).
+reversibility:
+  grade: none
+  state: no_reversal_operation
+  evidence: >-
+    All 25 Global Partner API operations and all 12 India API methods were checked. The API exposes no
+    refund, void, reverse, cancel, undo, rollback or restore operation of any kind.
+  write_surfaces:
+  - operation: MakePayments (POST /v1/MakePayment)
+    consequence: Debits an enrolled commercial credit card and initiates a payout to a vendor bank account.
+    reversal: none
+    window: not stated
+    note: >-
+      RefundDetails appears in the GetPaymentStatus and PaymentReport RESPONSES, but it reports a refund
+      PayMate initiates automatically when settlement to the beneficiary fails (codes 538 debit bank failure,
+      539 credit bank failure, and "Returned from beneficiary" in the India API). It is not a caller-invokable
+      reversal, and no time window is published for it.
+  - operation: CollectPayment (POST /v1/collectpayments)
+    consequence: Issues a payment collection request/link to a customer.
+    reversal: none
+    window: not stated
+  - operation: DeleteBusiness (POST /v1/deletebusiness)
+    consequence: Removes an onboarded business.
+    reversal: none
+    window: not stated
+    note: No restore operation and no stated soft-delete/undelete window.
+  - operation: DeleteContact (POST /v1/DeleteContact)
+    consequence: Removes a buyer/supplier contact.
+    reversal: none
+    window: not stated
+  - operation: DeleteCard (POST /v1/Deletecard)
+    consequence: Removes an enrolled commercial card.
+    reversal: none
+    window: not stated
+  legacy_note: >-
+    The India API's ApprovePayment() method can REJECT a payment that is still pending approval (status 199
+    "Awaiting to approve"), and error 179 "Cannot Abort Transaction" implies an abort path exists once a
+    transaction has moved on. Neither is documented as a reversal of a completed payment and no window is
+    stated, so this does not raise the grade.
+  agent_guidance: >-
+    Treat every PayMate write as irreversible through the API. An agent that must be able to back out a
+    payment has to stop before MakePayments — the only safe rehearsal point is the Development environment,
+    and the only pre-commit control is the account's maker/checker approval workflow, which is a dashboard
+    feature rather than an API one.
+cross_references:
+  errors: errors/paymate-error-codes.yml
+  legacy_errors: errors/paymate-india-problem-types.yml
+  lifecycle: lifecycle/paymate-lifecycle.yml
+  authentication: authentication/paymate-authentication.yml
+  rate_limits: rate-limits/paymate-rate-limits.yml
+  sandbox: sandbox/paymate-sandbox.yml

@@ -1,23 +1,152 @@
 aid: paymate
 name: PayMate
-description: 'PayMate is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  PayMate India Limited is a Mumbai-headquartered B2B payments and supply-chain finance platform that
+  digitizes, automates and streamlines business payables and receivables. Enterprises use PayMate to pay
+  vendors, GST and utility bills on commercial credit cards, to raise and collect invoice payment requests,
+  to run maker/checker approval workflows, and to access working-capital credit and invoice discounting.
+  The platform runs in India as PayMate and across Singapore, Malaysia, the UAE, Oman, Sri Lanka, Saudi
+  Arabia, Australia and South Africa — where the Australian and South African deployments carry the DuNoMo
+  brand. Two distinct API surfaces are published: the legacy India PayMate API (PMXClients WCF/JSON service)
+  and the current Global Partner API, a v1 REST surface for business (KYB) onboarding, contact onboarding,
+  commercial-card management, vendor payments, collection requests and reporting.
+image: https://paymate.in/imgs/pngs/apple-touch-icon.png
 url: https://raw.githubusercontent.com/api-evangelist/paymate/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
 specificationVersion: '0.20'
 created: '2026-08-26'
 modified: '2026-08-26'
 tags:
+- Payments
+- B2B Payments
+- Accounts Payable
+- Accounts Receivable
+- Supply Chain Finance
+- Invoice Discounting
+- Working Capital
+- Commercial Cards
+- Financial Services
+- India
+- Fintech
 - Company
-apis: []
+apis:
+- name: PayMate Global Partner API
+  description: >-
+    Partner-facing v1 REST API for the PayMate global platform. Twenty-five JSON-over-POST operations cover
+    business (KYB) onboarding and maintenance, buyer/supplier contact onboarding, commercial credit card
+    enrolment, vendor payment initiation and status, payment collection requests and status, reporting, and
+    reference data. The same surface is deployed per region on six hosts; Australia and South Africa are
+    branded DuNoMo. Access requires a secret partner API key issued by PayMate after onboarding.
+  humanURL: https://api.paymate.my/GlobalPartnerAPI
+  baseURL: https://api.paymate.my
+  x-base-url-note: >-
+    The same v1 surface is deployed on six regional hosts (api.paymate.sg, api.paymate.my, api.paymate.ae,
+    api.paymate.om, api.dunomo.au, api.dunomo.co.za) — all six are recorded in the OpenAPI servers[] block.
+    api.paymate.my is used as the canonical baseURL because it is the host whose live 401 response was
+    observed on 2026-08-26. This is a real multi-region deployment, not a source disagreement.
+  tags:
+  - Payments
+  - Collections
+  - Onboarding
+  - KYB
+  - Commercial Cards
+  properties:
+  - type: OpenAPI
+    url: openapi/paymate-global-partner-api-openapi.yml
+  - type: Documentation
+    url: https://api.paymate.my/GlobalPartnerAPI
+  - type: APIReference
+    url: https://api.paymate.my/GlobalPartnerAPI
+  - type: Overlay
+    url: overlays/paymate-global-partner-api-overlay.yaml
+  - type: ErrorCatalog
+    url: errors/paymate-error-codes.yml
+  - type: DataModel
+    url: data-model/paymate-data-model.yml
+- name: PayMate India Business Payments API
+  description: >-
+    Legacy India API (PMXClients service). Twelve JSON-over-POST methods let a business add vendors and
+    customers as contacts, book and approve vendor payments, raise collection requests, generate hosted
+    checkout links, check the Xpress account balance and pull payment/collection reports. Requests and
+    responses are AES-256 encrypted and authenticated with MerchantIdentification, TerminalIdentification,
+    XpressID and the registered email in the request headers, from a whitelisted domain or IP.
+  humanURL: https://paymate.in/paymateapi/APIDoc.html
+  baseURL: https://uat.paymate.co.in/PayMateSite/PayMateService/PMXClients.svc/PMXClients/
+  x-base-url-note: >-
+    This is the DEVELOPMENT (UAT) base URL, and it is the only base PayMate publishes for the India API. No
+    production host is named anywhere in https://paymate.in/paymateapi/APIDoc.html. Recorded as published
+    rather than guessed from the domain. The host resolves to 43.242.212.84 but does not answer HTTPS from a
+    general-purpose network — PayMate requires the calling domain or IP to be whitelisted first.
+  tags:
+  - Payments
+  - Collections
+  - India
+  properties:
+  - type: Documentation
+    url: https://paymate.in/paymateapi/APIDoc.html
+  - type: APIReference
+    url: https://paymate.in/paymateapi/APIDoc.html
+  - type: ErrorCatalog
+    url: errors/paymate-india-problem-types.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/paymate-domain-security.yml
 - type: Website
-  url: https://www.hiive.com/securities/paymate-stock
+  url: https://paymate.in/
+- type: DeveloperPortal
+  url: https://api.paymate.my/GlobalPartnerAPI
+- type: Documentation
+  url: https://paymate.in/paymateapi/APIDoc.html
+- type: APIReference
+  url: https://api.paymate.my/GlobalPartnerAPI
+- type: Support
+  url: https://paymate.in/contactus.html
+- type: Blog
+  url: https://paymate.in/blog.html
+- type: Pricing
+  url: https://paymate.in/Pricing_terms.html
+- type: Login
+  url: https://paymate.in/login.aspx
+- type: TermsOfService
+  url: https://paymate.in/terms.html
+- type: PrivacyPolicy
+  url: https://paymate.in/privacy.html
+- type: Authentication
+  url: authentication/paymate-authentication.yml
+- type: Conventions
+  url: conventions/paymate-conventions.yml
+- type: Idempotency
+  url: conventions/paymate-conventions.yml
+- type: ErrorCatalog
+  url: errors/paymate-error-codes.yml
+- type: Plans
+  url: plans/paymate-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/paymate-rate-limits.yml
+- type: Conformance
+  url: conformance/paymate-conformance.yml
+- type: Compliance
+  url: conformance/paymate-conformance.yml
+- type: Lifecycle
+  url: lifecycle/paymate-lifecycle.yml
+- type: Sandbox
+  url: sandbox/paymate-sandbox.yml
+- type: DataModel
+  url: data-model/paymate-data-model.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/paymate-llms.txt
+- type: Overlay
+  url: overlays/paymate-global-partner-api-overlay.yaml
+x-enrichment:
+  date: '2026-08-26'
+  status: enriched
+  artifacts_added: 28
+  pass: local-v1

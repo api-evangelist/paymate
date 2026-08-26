@@ -1,0 +1,29 @@
+generated: '2026-08-26'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: paymate.in
+  https: true
+  tls_version: TLSv1.2
+  cert_expires: Oct 22 10:43:55 2026 GMT
+  hsts: null
+- host: api.paymate.my
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 27 10:20:26 2026 GMT
+  hsts: null
+- host: uat.paymate.co.in
+  https: false
+domains:
+- domain: paymate.in
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: reject
+- domain: paymate.my
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: reject

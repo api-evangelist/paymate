@@ -1,0 +1,133 @@
+generated: '2026-08-26'
+method: derived
+source: openapi/paymate-global-partner-api-openapi.yml
+status: candidate
+published_server: false
+note: >-
+  PayMate ships no MCP server. POST tools/list against https://api.paymate.my/mcp and https://paymate.in/mcp
+  both returned HTTP 404 on 2026-08-26, no MCP endpoint is named anywhere in PayMate's documentation, and no
+  MCP package for PayMate exists in any registry. The tools below are a CANDIDATE mapping derived from the
+  Global Partner API operations — they describe what a server WOULD expose if PayMate or a third party built
+  one. No `type: MCPServer` pointer is wired into apis.yml, because there is no server to point at.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: api-key
+  verified: derived
+probes:
+- url: https://api.paymate.my/mcp
+  method: POST tools/list
+  status: 404
+- url: https://paymate.in/mcp
+  method: POST tools/list
+  status: 404
+- url: https://api.paymate.my/.well-known/oauth-authorization-server
+  status: 404
+- url: https://api.paymate.my/.well-known/oauth-protected-resource
+  status: 404
+candidate_tools:
+- name: onboard_business
+  rest: BusinessBoarding
+  description: Onboard a business (KYB) onto the PayMate platform.
+  consequence: write
+- name: modify_business
+  rest: ModifyBusiness
+  description: Update an onboarded business record.
+  consequence: write
+- name: set_transaction_charges
+  rest: SetTransactionCharges
+  description: Set the per-business fee configuration.
+  consequence: write
+- name: delete_business
+  rest: DeleteBusiness
+  description: Remove an onboarded business. Irreversible — no restore operation exists.
+  consequence: destructive
+- name: set_collection_account
+  rest: SetCollectionAccount
+  description: Set the bank account a business's collections settle into.
+  consequence: write
+- name: list_businesses
+  rest: ManageBusiness
+  description: Retrieve onboarded business records.
+  consequence: read
+- name: get_terms_and_conditions
+  rest: TermsCondition
+  description: Retrieve the platform terms a business must accept.
+  consequence: read
+- name: onboard_contact
+  rest: ContactBoarding
+  description: Onboard a buyer or supplier contact with bank account details.
+  consequence: write
+- name: modify_contact
+  rest: ModifyContact
+  description: Update a contact's details.
+  consequence: write
+- name: delete_contact
+  rest: DeleteContact
+  description: Remove a contact. Irreversible.
+  consequence: destructive
+- name: list_contacts
+  rest: ManageContacts
+  description: Retrieve contacts with bank and KYC details.
+  consequence: read
+- name: make_payment
+  rest: MakePayments
+  description: Initiate a vendor payment funded by an enrolled commercial card.
+  consequence: money-movement
+  note: No reversal operation exists. Requires a client OrderID; a duplicate is rejected with code 413.
+- name: vendor_payment
+  rest: VendorPayments
+  description: Australia-only vendor payment operation.
+  consequence: money-movement
+  regions: [au]
+- name: get_payment_status
+  rest: GetPaymentStatus
+  description: Retrieve the current status of a payment by OrderID or PayMateRequestNo.
+  consequence: read
+- name: payment_report
+  rest: PaymentReport
+  description: Retrieve payments over a date range.
+  consequence: read
+- name: collect_payment
+  rest: CollectPayment
+  description: Raise a payment collection request against a customer.
+  consequence: write
+- name: get_collection_status
+  rest: CollectionStatus
+  description: Retrieve the status of a collection request.
+  consequence: read
+- name: collection_report
+  rest: CollectionReport
+  description: Retrieve collections over a date range.
+  consequence: read
+- name: add_card
+  rest: AddCard
+  description: Tokenize a commercial credit card. Returns a 3-D Secure challenge form to render.
+  consequence: write
+  note: Restricted to PCI-certified callers.
+- name: list_cards
+  rest: ManageCards
+  description: Retrieve enrolled cards.
+  consequence: read
+- name: delete_card
+  rest: DeleteCard
+  description: Remove an enrolled card. Irreversible.
+  consequence: destructive
+- name: list_payment_types
+  rest: PaymentType
+  description: Retrieve supported payment types.
+  consequence: read
+- name: submit_buyer_supplier_kyc
+  rest: Buyersupplierkyc
+  description: Submit business, address and bank proof documents for KYC.
+  consequence: write
+- name: submit_shareholder_details
+  rest: ShareholderDetails
+  description: Submit beneficial-owner/shareholder records for KYB.
+  consequence: write
+- name: list_countries
+  rest: Countrylist
+  description: Retrieve the supported country list.
+  consequence: read
