@@ -31,39 +31,6 @@ tags:
 - Fintech
 - Company
 apis:
-- name: PayMate Global Partner API
-  description: >-
-    Partner-facing v1 REST API for the PayMate global platform. Twenty-five JSON-over-POST operations cover
-    business (KYB) onboarding and maintenance, buyer/supplier contact onboarding, commercial credit card
-    enrolment, vendor payment initiation and status, payment collection requests and status, reporting, and
-    reference data. The same surface is deployed per region on six hosts; Australia and South Africa are
-    branded DuNoMo. Access requires a secret partner API key issued by PayMate after onboarding.
-  humanURL: https://api.paymate.my/GlobalPartnerAPI
-  baseURL: https://api.paymate.my
-  x-base-url-note: >-
-    The same v1 surface is deployed on six regional hosts (api.paymate.sg, api.paymate.my, api.paymate.ae,
-    api.paymate.om, api.dunomo.au, api.dunomo.co.za) — all six are recorded in the OpenAPI servers[] block.
-    api.paymate.my is used as the canonical baseURL because it is the host whose live 401 response was
-    observed on 2026-08-26. This is a real multi-region deployment, not a source disagreement.
-  tags:
-  - Payments
-  - Collections
-  - Onboarding
-  - KYB
-  - Commercial Cards
-  properties:
-  - type: OpenAPI
-    url: openapi/paymate-global-partner-api-openapi.yml
-  - type: Documentation
-    url: https://api.paymate.my/GlobalPartnerAPI
-  - type: APIReference
-    url: https://api.paymate.my/GlobalPartnerAPI
-  - type: Overlay
-    url: overlays/paymate-global-partner-api-overlay.yaml
-  - type: ErrorCatalog
-    url: errors/paymate-error-codes.yml
-  - type: DataModel
-    url: data-model/paymate-data-model.yml
 - name: PayMate India Business Payments API
   description: >-
     Legacy India API (PMXClients service). Twelve JSON-over-POST methods let a business add vendors and
@@ -74,10 +41,10 @@ apis:
   humanURL: https://paymate.in/paymateapi/APIDoc.html
   baseURL: https://uat.paymate.co.in/PayMateSite/PayMateService/PMXClients.svc/PMXClients/
   x-base-url-note: >-
-    This is the DEVELOPMENT (UAT) base URL, and it is the only base PayMate publishes for the India API. No
-    production host is named anywhere in https://paymate.in/paymateapi/APIDoc.html. Recorded as published
-    rather than guessed from the domain. The host resolves to 43.242.212.84 but does not answer HTTPS from a
-    general-purpose network — PayMate requires the calling domain or IP to be whitelisted first.
+    This is the DEVELOPMENT (UAT) base URL, and it is the only base PayMate publishes for the India API.
+    No production host is named anywhere in https://paymate.in/paymateapi/APIDoc.html. Recorded as published
+    rather than guessed from the domain. The host resolves to 43.242.212.84 but does not answer HTTPS
+    from a general-purpose network — PayMate requires the calling domain or IP to be whitelisted first.
   tags:
   - Payments
   - Collections
@@ -89,6 +56,114 @@ apis:
     url: https://paymate.in/paymateapi/APIDoc.html
   - type: ErrorCatalog
     url: errors/paymate-india-problem-types.yml
+- aid: paymate:paymate-businesses-api
+  name: PayMate Businesses API
+  description: Business (KYB) onboarding, maintenance, charges and collection account setup
+  humanURL: https://api.paymate.my/GlobalPartnerAPI
+  baseURL: https://api.paymate.my
+  tags:
+  - Businesses
+  properties:
+  - type: OpenAPI
+    url: openapi/paymate-businesses-api-openapi.yml
+  - type: Documentation
+    url: https://api.paymate.my/GlobalPartnerAPI
+  - type: APIReference
+    url: https://api.paymate.my/GlobalPartnerAPI
+  - type: ErrorCatalog
+    url: errors/paymate-error-codes.yml
+  - type: DataModel
+    url: data-model/paymate-data-model.yml
+- aid: paymate:paymate-cards-api
+  name: PayMate Cards API
+  description: Commercial credit card enrolment and management
+  humanURL: https://api.paymate.my/GlobalPartnerAPI
+  baseURL: https://api.paymate.my
+  tags:
+  - Cards
+  properties:
+  - type: OpenAPI
+    url: openapi/paymate-cards-api-openapi.yml
+  - type: Documentation
+    url: https://api.paymate.my/GlobalPartnerAPI
+  - type: APIReference
+    url: https://api.paymate.my/GlobalPartnerAPI
+  - type: ErrorCatalog
+    url: errors/paymate-error-codes.yml
+  - type: DataModel
+    url: data-model/paymate-data-model.yml
+- aid: paymate:paymate-collections-api
+  name: PayMate Collections API
+  description: Payment collection requests, status and reporting
+  humanURL: https://api.paymate.my/GlobalPartnerAPI
+  baseURL: https://api.paymate.my
+  tags:
+  - Collections
+  properties:
+  - type: OpenAPI
+    url: openapi/paymate-collections-api-openapi.yml
+  - type: Documentation
+    url: https://api.paymate.my/GlobalPartnerAPI
+  - type: APIReference
+    url: https://api.paymate.my/GlobalPartnerAPI
+  - type: ErrorCatalog
+    url: errors/paymate-error-codes.yml
+  - type: DataModel
+    url: data-model/paymate-data-model.yml
+- aid: paymate:paymate-contacts-api
+  name: PayMate Contacts API
+  description: Buyer / supplier contact onboarding and maintenance
+  humanURL: https://api.paymate.my/GlobalPartnerAPI
+  baseURL: https://api.paymate.my
+  tags:
+  - Contacts
+  properties:
+  - type: OpenAPI
+    url: openapi/paymate-contacts-api-openapi.yml
+  - type: Documentation
+    url: https://api.paymate.my/GlobalPartnerAPI
+  - type: APIReference
+    url: https://api.paymate.my/GlobalPartnerAPI
+  - type: ErrorCatalog
+    url: errors/paymate-error-codes.yml
+  - type: DataModel
+    url: data-model/paymate-data-model.yml
+- aid: paymate:paymate-payments-api
+  name: PayMate Payments API
+  description: Vendor payment initiation, status and reporting
+  humanURL: https://api.paymate.my/GlobalPartnerAPI
+  baseURL: https://api.paymate.my
+  tags:
+  - Payments
+  properties:
+  - type: OpenAPI
+    url: openapi/paymate-payments-api-openapi.yml
+  - type: Documentation
+    url: https://api.paymate.my/GlobalPartnerAPI
+  - type: APIReference
+    url: https://api.paymate.my/GlobalPartnerAPI
+  - type: ErrorCatalog
+    url: errors/paymate-error-codes.yml
+  - type: DataModel
+    url: data-model/paymate-data-model.yml
+- aid: paymate:paymate-reference-api
+  name: PayMate Reference API
+  description: Reference data
+  humanURL: https://api.paymate.my/GlobalPartnerAPI
+  baseURL: https://api.paymate.my
+  tags:
+  - Reference
+  properties:
+  - type: OpenAPI
+    url: openapi/paymate-reference-api-openapi.yml
+  - type: Documentation
+    url: https://api.paymate.my/GlobalPartnerAPI
+  - type: APIReference
+    url: https://api.paymate.my/GlobalPartnerAPI
+  - type: ErrorCatalog
+    url: errors/paymate-error-codes.yml
+  - type: DataModel
+    url: data-model/paymate-data-model.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
