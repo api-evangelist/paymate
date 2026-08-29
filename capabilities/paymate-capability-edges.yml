@@ -1,0 +1,36 @@
+slug: paymate
+provider: PayMate
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Banking & Capital Markets
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: Payments
+  spec_file: paymate-payments-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.85
+  evidence: POST /v1/MakePayment  MakePayments  Make Payments; POST /v1/VendorPayment  VendorPayments  Vendor
+    Payments; POST /v1/getpaymentstatus
+  reason: Operations capture and submit vendor/business payment instructions and track their status on
+    a B2B payments platform — payment initiation and processing, not accounting.
+- tag: Businesses
+  spec_file: paymate-businesses-api-openapi.yml
+  capability_id: BC-1300.10
+  capability_id_l1: BC-1300
+  capability_name: Customer Onboarding Management
+  confidence: 0.7
+  evidence: POST /v1/businessboarding  BusinessBoarding; POST /v1/processbuyersupplierkyc  Buyersupplierkyc;
+    POST /v1/processShareholderdetails  ShareholderDetails
+  reason: Operations onboard a business entity onto the payments platform including KYB/KYC and shareholder
+    (UBO) capture, then maintain or delete it — customer onboarding with identity verification. Overlap
+    with the KYC & CDD sub-capability keeps confidence below 0.8.

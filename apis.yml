@@ -182,6 +182,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/paymate-capability-edges.yml
+  name: PayMate Business Capability Map
 - type: DomainSecurity
   url: security/paymate-domain-security.yml
 - type: Website
