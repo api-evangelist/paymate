@@ -10,6 +10,18 @@ description: >-
   brand. Two distinct API surfaces are published: the legacy India PayMate API (PMXClients WCF/JSON service)
   and the current Global Partner API, a v1 REST surface for business (KYB) onboarding, contact onboarding,
   commercial-card management, vendor payments, collection requests and reporting.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://paymate.in/imgs/pngs/apple-touch-icon.png
 url: https://raw.githubusercontent.com/api-evangelist/paymate/refs/heads/main/apis.yml
 x-type: company
