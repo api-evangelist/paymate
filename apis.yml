@@ -38,6 +38,19 @@ tags:
 - Invoice Discounting
 - Working Capital
 - Commercial Cards
+- Financial-Services
+- India
+- Fintech
+- Company
+tags_raw:
+- Payments
+- B2B Payments
+- Accounts Payable
+- Accounts Receivable
+- Supply Chain Finance
+- Invoice Discounting
+- Working Capital
+- Commercial Cards
 - Financial Services
 - India
 - Fintech
@@ -58,6 +71,10 @@ apis:
     rather than guessed from the domain. The host resolves to 43.242.212.84 but does not answer HTTPS
     from a general-purpose network — PayMate requires the calling domain or IP to be whitelisted first.
   tags:
+  - Payments
+  - Collection
+  - India
+  tags_raw:
   - Payments
   - Collections
   - India
@@ -110,6 +127,8 @@ apis:
   humanURL: https://api.paymate.my/GlobalPartnerAPI
   baseURL: https://api.paymate.my
   tags:
+  - Collection
+  tags_raw:
   - Collections
   properties:
   - type: OpenAPI

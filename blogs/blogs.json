@@ -1,0 +1,14 @@
+{
+  "repo": "paymate",
+  "feeds": [
+    {
+      "source": "https://paymate.in/contactus.html",
+      "feed_url": "https://paymate.in/contactus.html",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-08-30T22:33:40Z"
+}
