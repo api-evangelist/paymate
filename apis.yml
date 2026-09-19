@@ -107,6 +107,8 @@ apis:
   humanURL: https://api.paymate.my/GlobalPartnerAPI
   baseURL: https://api.paymate.my
   tags:
+  - Business
+  tags_raw:
   - Businesses
   properties:
   - type: OpenAPI
