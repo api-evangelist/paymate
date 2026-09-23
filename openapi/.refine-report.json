@@ -1,0 +1,30 @@
+{
+  "provider": "paymate",
+  "sources": [
+    "_original/paymate-global-partner-api-openapi.yml"
+  ],
+  "outputs": [
+    "paymate-businesses-api-openapi.yml",
+    "paymate-cards-api-openapi.yml",
+    "paymate-collections-api-openapi.yml",
+    "paymate-contacts-api-openapi.yml",
+    "paymate-payments-api-openapi.yml",
+    "paymate-reference-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "paymate-global-partner-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "paymate-businesses-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "paymate-cards-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "paymate-collections-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "paymate-contacts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "paymate-payments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "paymate-reference-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}
