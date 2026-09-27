@@ -54,7 +54,7 @@ tags:
 - Invoice Discounting
 - Working Capital
 - Commercial Cards
-- Financial-Services
+- Financial Services
 - India
 - Fintech
 - Company
@@ -71,6 +71,7 @@ tags_raw:
 - India
 - Fintech
 - Company
+- Financial-Services
 apis:
 - name: PayMate India Business Payments API
   description: >-
