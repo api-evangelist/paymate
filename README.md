@@ -64,5 +64,123 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-PayMate is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://www.hiive.com/securities/paymate-stock
+PayMate India Limited is a Mumbai-headquartered B2B payments and supply-chain finance platform that digitizes, automates and streamlines business payables and receivables. Enterprises use PayMate to pay vendors, GST and utility bills on commercial credit cards, to raise and collect invoice payment requests, to run maker/checker approval workflows, and to access working-capital credit and invoice discounting. The platform runs in India as PayMate and across Singapore, Malaysia, the UAE, Oman, Sri Lanka, Saudi Arabia, Australia and South Africa — where the Australian and South African deployments carry the DuNoMo brand. Two distinct API surfaces are published: the legacy India PayMate API (PMXClients WCF/JSON service) and the current Global Partner API, a v1 REST surface for business (KYB) onboarding, contact onboarding, commercial-card management, vendor payments, collection requests and reporting.
+
+**Areas:** Payments · B2B Payments · Accounts Payable · Accounts Receivable · Supply Chain Finance · Invoice Discounting · Working Capital · Commercial Cards · Financial Services · India · Fintech · Company
+
+## PayMate on APIs.io
+
+Everything profiled for PayMate is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/paymate/](https://apis.io/providers/paymate/)** — or go straight to one of the APIs or properties below.
+
+### APIs (7)
+
+- [PayMate India Business Payments API](https://apis.io/apis/paymate/paymate-india-business-payments-api/) — Legacy India API (PMXClients service). Twelve JSON-over-POST methods let a business add vendors and customers as contacts, book and approve vendor payments,…
+- [PayMate Businesses API](https://apis.io/apis/paymate/paymate-businesses-api/) — Business (KYB) onboarding, maintenance, charges and collection account setup
+- [PayMate Cards API](https://apis.io/apis/paymate/paymate-cards-api/) — Commercial credit card enrolment and management
+- [PayMate Collections API](https://apis.io/apis/paymate/paymate-collections-api/) — Payment collection requests, status and reporting
+- [PayMate Contacts API](https://apis.io/apis/paymate/paymate-contacts-api/) — Buyer / supplier contact onboarding and maintenance
+- [PayMate Payments API](https://apis.io/apis/paymate/paymate-payments-api/) — Vendor payment initiation, status and reporting
+- [PayMate Reference API](https://apis.io/apis/paymate/paymate-reference-api/) — Reference data
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [paymate-mcp.yml](https://apis.io/servers/paymate/paymate-mcp-yml/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Paymate Global Partner Api Overlay](https://apis.io/overlays/paymate/paymate-global-partner-api-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Paymate Authentication](https://apis.io/security/paymate/paymate-authentication/)
+- [Paymate Domain Security](https://apis.io/security/paymate/paymate-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Paymate Plans Pricing](https://apis.io/plans/paymate/paymate-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Paymate Rate Limits](https://apis.io/rate-limits/paymate/paymate-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://paymate.in/)
+- [Documentation](https://paymate.in/paymateapi/APIDoc.html)
+- [API reference](https://api.paymate.my/GlobalPartnerAPI)
+- [Pricing](https://paymate.in/Pricing_terms.html)
+- [Support](https://paymate.in/contactus.html)
+- [Blog](https://paymate.in/blog.html)
+- [Terms of service](https://paymate.in/terms.html)
+- [Privacy policy](https://paymate.in/privacy.html)
+
+## API Evangelist rating
+
+**Kin Score 53.9** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 53.9 |
+| Contract governance | 18.2 |
+| Operational transparency | 31.6 |
+| Developer ergonomics | 54.2 |
+| Access clarity | 77.6 |
+
+**Agent readiness 34.3** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | documented (partial credit) |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 32.1** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/paymate/](https://apis.io/providers/paymate/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for PayMate: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/paymate/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
